@@ -1,0 +1,46 @@
++++
+title = 'Many-to-Many relationship'
+description = 'Ways to generate data for many-to-many relationships by Foxglove.'
+weight = 10
++++
+
+There are ways to generate data for many-to-many relationships by {foxglove-link}.
+
+`dataGenerator()` - A method gives a {foxglove-javadoc-link}/DataGenerator.html[DataGenerator] instance.
+
+== Confined domain of ids
+
+. Confine the domain for both sides
+. Use Cartesian product to generate data for the junction table
+
+.Fixed domain
+[source,java]
+----
+include::{example-dir}/ManyToManyTest.java[tags=fixedDomain,indent=0]
+----
+
+== One side referencing
+
+. Any way to decide the number of rows to referenced side(table)
+	* Use `.referencing(String)` for this side
+	* Use the number of values on referencing side to `.cardinality(int)`
+. Fix the domain for another side(table)
+	* Use `.column(String).roundRobin(...)` for this side
+
+.One-side referencing
+[source,java]
+----
+include::{example-dir}/ManyToManyTest.java[tags=oneSideReferencing,indent=0]
+----
+
+Of course, you can use `.column("rt_mb_id").roundRobin(idsOfMembers)` directly.
+
+== Two side referencing
+
+. Both of the sides are referencing by `cartesianProduct(String)`
+
+.One-side referencing
+[source,java]
+----
+include::{example-dir}/ManyToManyTest.java[tags=cartesianProductByReferencing,indent=0]
+----

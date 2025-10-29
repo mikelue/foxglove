@@ -1,0 +1,110 @@
+name: Maven build and publish artifact
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "pom.xml"
+      - "src/**"
+      - "site/content/**"
+      - "site/layouts/**"
+      - "site/resources/**"
+      - "site/assets/**"
+      - "site/static/**"
+      - ".github/workflows/maven-publish.yml"
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'oracle'
+          java-version: '21'
+          cache: 'maven'
+
+      - uses: dorny/paths-filter@v3
+        id: src-file-change
+        with:
+          filters: |
+            rebuild:
+              - 'src/**'
+              - pom.xml
+
+      - name: Show Maven version
+        run: mvn --version
+
+      - name: Build and test
+        run: mvn -B -Dstyle.color=always clover:setup test
+
+      - name: Generate Clover report
+        run: mvn -B -Dstyle.color=always clover:clover
+
+      - name: Upload Clover report
+        uses: actions/upload-artifact@v4
+        with:
+          name: clover-report
+          path: site/public/clover/
+          retention-days: 1
+
+      - name: Publish to GitHub Packages
+        if: |-
+          steps.src-file-change.output.rebuild == 'true' &&
+          (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: mvn -B -Dstyle.color=always -s .github/maven-settings.xml deploy -DskipTests=true
+
+  hugo-site:
+    if: github.ref == 'refs/heads/main'
+    needs: [ "build-and-publish" ]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          submodules: 'recursive'
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: 'oracle'
+          java-version: '21'
+          cache: 'maven'
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Install Asciidoctor and extensions
+        run: |
+          gem install asciidoctor
+          gem install asciidoctor-html5s asciidoctor-mermaid  asciidoctor-include-ext asciidoctor-rouge
+          gem install asciidoctor-diagram asciidoctor-diagram-plantuml asciidoctor-diagram-batik
+
+      - name: Build Hugo site
+        run: mvn site -DskipTests=true
+
+      - name: Download Clover report
+        uses: actions/download-artifact@v5
+        with:
+          name: clover-report
+          path: site/public/clover
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site/public
+          force_orphan: true
+          user_name: 'mikelue'
+          user_email: 'mike.lue0627@msa.hinet.net'

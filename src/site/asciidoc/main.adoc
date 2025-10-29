@@ -1,0 +1,7 @@
+= Foxglove
+
+Foxglove is a Java library for generating sample data for relational databases (RDB) by
+inspecting database schemas and applying table facets (rules for data generation).
+
+* link:/[Offical Site] for quick-start, documentations, and examples.
+* link:/clover[Clover Report](Coverage Report).

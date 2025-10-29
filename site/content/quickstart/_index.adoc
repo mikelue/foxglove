@@ -1,0 +1,33 @@
++++
+title = 'Quick-start'
+description = 'The index page for articles to get started quickly.'
+weight = 10
++++
+
+- Check link:table-facet[Table facet(Quick start)] for snippets of link:/docs/table-facet/[Table Facet].
+- Check link:settings[Settings(Quick start)] for snippets of link:/docs/settings/[Settings].
+
+== Installation
+
+include::content/snippets/installation.adoc[]
+
+== Use DataSource
+
+.Generating data by `javax.sql.DataSource`
+[source,java]
+----
+import javax.sql.DataSource;
+
+import guru.mikelue.foxglove.jdbc.JdbcTableFacet;
+import guru.mikelue.foxglove.jdbc.JdbcDataGenerator;
+
+include::{example-dir}/TableFacetTest.java[tag=basicUsage,indent=0]
+----
+
+See link:/docs/default-generators[default generators] page for more details.
+
+== References
+
+- {jdk-doc}/java.sql/javax/sql/DataSource.html[DataSource]
+- link:/docs/table-facet/[Table Facet] - Defines logics for generating data for a specific table.
+- link:/docs/settings/[Settings] - Defines logics for generating data by data type, etc.

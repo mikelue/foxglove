@@ -1,0 +1,3 @@
+!theme crt-amber
+skinparam defaultFontSize 19
+skinparam defaultFontName "Noto Sans Mono"

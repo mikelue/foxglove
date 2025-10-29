@@ -1,0 +1,99 @@
++++
+title = 'Settings'
+description = 'Different level of settings to control data generation'
+weight = 20
++++
+
+:supplier_link: {jdk-doc}/java.base/java/util/function/Supplier.html[Supplier]
+:jdbc_type_link: {jdk-doc}/java.sql/java/sql/JDBCType.html[java.sql.JDBCType]
+:value_spec_link: {instancio-core-doc}/org/instancio/generator/ValueSpec.html[ValueSpec]
+:instancio_link: https://www.instancio.org/[Instancio]
+
+See link:/docs/default-generators[default generators] page for more details about default generators.
+
+Packages:
+
+* `guru.mikelue.foxglove.setting` - The main package providing {foxglove-javadoc-link}/setting/DataSetting.html[DataSetting].
+
+== Overview
+
+The setting object is {foxglove-javadoc-link}/setting/DataSetting.html[DataSetting], which controls how to decide generators for columns.
+
+Ways to choose generators(ordered by priority)::
+
+. By {foxglove-javadoc-link}/functional/ColumnMatcher.html[ColumnMatcher], which is a {jdk-doc}/java.base/java/util/function/Predicate.html[Predicate<ColumnMeta>]
+. By _type name_(as `String`), which comes from `TYPE_NAME` of `DatabaseMetaData.getColumns(...)`
+. By {jdbc_type_link}, which comes from `DATA_TYPE` of `DatabaseMetaData.getColumns(...)`
+
+Ways to provide {supplier_link} for a column::
+
+. A {supplier_link}
+. A {foxglove-javadoc-link}/functional/SupplierDecider.html[SupplierDecider], which is a function to decide {supplier_link} by {foxglove-javadoc-link}/ColumnMeta.html[ColumnMeta]
+. A {supplier_link} for {value_spec_link} of {instancio_link}
+
+---
+
+.Versatile example of DataSetting
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=versatileSetting,indent=0]
+----
+
+== Global settings
+
+* You could use `DataSetting.default()` to get the current global settings.
+
+.Modify global settings
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=globalSetting,indent=0]
+----
+
+=== Apply to TableFacet
+
+See link:/docs/table-facet/#setting[Table Facet - Setting] for applying {foxglove-javadoc-link}/setting/DataSetting.html[DataSetting] to {foxglove-javadoc-link}/TableFacet.html[TableFacet].
+
+=== Apply to DataGenerator
+
+.DataGenerator.withSetting
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=onDataGenerator,indent=0]
+----
+
+== Multi-level settings
+
+Both of {foxglove-javadoc-link}/TableFacet.html[TableFacet] and {foxglove-javadoc-link}/DataGenerator.html[DataGenerator] are implementing `SettingAware`,
+which have their own settings.
+
+The priority of settings(from high to low) are:
+
+. {foxglove-javadoc-link}/TableFacet.html[TableFacet] setting
+. {foxglove-javadoc-link}/DataGenerator.html[DataGenerator] setting
+. `DataSetting.defaults()`
+
+[NOTE]
+====
+The _scalar settings_(e.g. `generateNull(boolean)`, `largeTextLength(int)`) are only applied to current level.
+
+If current level have found(by `resolveSupplier(ColumnMeta)`) a {supplier_link} for a column,
+it will use these _scalar settings_ from itself.
+====
+
+== Excluding
+
+The {foxglove-javadoc-link}/setting/DataSetting.html[DataSetting] is a kind of fallback mechanism to provide generators for columns without specific generator defined.
+
+You could use `DataSetting.execludeWhen(Predicate<ColumnMeta>)` to exclude some columns from applying any generator of this setting.
+
+.Excluding example
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=excludeWhen,indent=0]
+----
+
+== References
+
+* {jdk-doc}/java.sql/java/sql/JDBCType.html[java.sql.JDBCType]
+* {jdk-doc}/java.sql/java/sql/DatabaseMetaData.html#getColumns(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[DatabaseMetaData.getColumns(...)]
+* {jdk-doc}/java.sql/java/sql/ResultSetMetaData.html[ResultSetMetaData]

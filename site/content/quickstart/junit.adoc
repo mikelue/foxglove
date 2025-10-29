@@ -1,0 +1,84 @@
++++
+title = 'JUnit 5'
+description = 'JUnit 5 integration of Foxglove'
+weight = 5
++++
+
+:supplier-link: {jdk-doc}/java.base/java/util/function/Supplier.html[Supplier]
+:genData-link: {foxglove-javadoc-link}/annotation/GenData.html[@GenData]
+:tableFacetsSource-link: {foxglove-javadoc-link}/annotation/TableFacetsSource.html[@TableFacetsSource]
+:dataGeneratorSource-link: {foxglove-javadoc-link}/annotation/DataGeneratorSource.html[@DataGeneratorSource]
+:tableFacetsprovider-link: {foxglove-javadoc-link}/functional/TableFacetsProvider.html[TableFacetsProvider]
+
+== Dependencies
+
+* {junit5-link} - At least `5.10.x`
+
+.test dependencies in pom.xml
+[source,xml]
+----
+<dependency>
+    <groupId>guru.mikelue.foxglove</groupId>
+    <artifactId>core</artifactId>
+    <version>1.0-SNAPSHOT</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>org.junit.jupiter</groupId>
+	<artifactId>junit-jupiter</artifactId>
+	<version>5.10.5</version>
+	<scope>test</scope>
+</dependency>
+----
+
+== Extension
+
+Package: `guru.mikelue.foxglove.junit`
+
+* Use {foxglove-javadoc-link}/junit/FoxgloveJUnitExtension.html[FoxgloveJUnitExtension] to enable Foxglove on {junit5-link} tests.
+
+== Annotations
+
+Package: `guru.mikelue.foxglove.junit.annotation`
+
+* {tableFacetsSource-link} - Annotation to provide {foxglove-javadoc-link}/TableFacet.html[TableFacet](s) for the test class.
+* {dataGeneratorSource-link} - Annotation to provide {foxglove-javadoc-link}/DataGenerator.html[DataGenerator](s) for the test class.
+
+---
+
+{genData-link} - Annotation to enable data generation for test methods or test class.
+
+* `value` - Array of {tableFacetsprovider-link}(s) defining the table facets.
+* `facets` - Array of {tableFacetsprovider-link}(s) defining the table facets.
+* `facetsNames` - Names of fields or methods, which are type of {foxglove-javadoc-link}/TableFacet.html[TableFacet], `List<TableFacet>`, `Stream<TableFacet>` or {tableFacetsprovider-link}.
+* `generator` - Type of `DataGeneratorProvider` providing {foxglove-javadoc-link}/DataGenerator.html[DataGenerator].
+* `generatorName` - Name of {foxglove-javadoc-link}/DataGenerator.html[DataGenerator].
+
+== Examples
+
+include::content/snippets/jdbc-tablefacet-warning.adoc[]
+
+See link:/examples/junit5/[JUnit 5 Examples] for complete examples.
+
+* For {genData-link} - If none of properties provided, the extension will looking for {tableFacetsSource-link} and {dataGeneratorSource-link} on the test class.
+
+.Usage of `FoxgloveJUnitExtension`
+[source,java]
+----
+import guru.mikelue.foxglove.annotation.*;
+import guru.mikelue.foxglove.jdbc.JdbcDataGenerator;
+import guru.mikelue.foxglove.jdbc.JdbcTableFacet;
+import guru.mikelue.foxglove.junit.FoxgloveJUnitExtension;
+
+include::{example-dir}/JUnit5Test.java[tag=foxgloveExtension,indent=0]
+----
+
+== Functional utility types
+
+Package: `guru.mikelue.foxglove.junit.functional`
+
+* {tableFacetsprovider-link} - A {supplier-link} of `List<TableFacet>` to provide table facets for the test class.
+**	{foxglove-javadoc-link}/functional/TableFacetProvider.html[TableFacetProvider] - A {supplier-link} of {tableFacet-link} to provide single table facet for the test class.
+**	{foxglove-javadoc-link}/functional/StreamOfTableFacetsProvider.html[StreamOfTableFacetsProvider] - A {supplier-link} of `Stream<TableFacet>` to provide table facets for the test class.
+
+== References

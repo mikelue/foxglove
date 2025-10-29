@@ -1,0 +1,79 @@
+
++++
+title = 'SpringFramework'
+description = 'SpringFramework integration of Foxglove'
+weight = 5
++++
+
+== Dependencies
+
+* {springframework-link} - At least `6.0.x`
+* {springboot-link}(Optional) - At least `3.1.x`
+** It would be more convenient using SpringBoot for your tests.
+
+.test dependencies in pom.xml
+[source,xml]
+----
+<dependency>
+    <groupId>guru.mikelue.foxglove</groupId>
+    <artifactId>core</artifactId>
+    <version>1.0-SNAPSHOT</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>org.junit.jupiter</groupId>
+	<artifactId>junit-jupiter</artifactId>
+	<version>5.10.5</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-jdbc</artifactId>
+	<version>3.1.12</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-test</artifactId>
+	<version>3.1.12</version>
+	<scope>test</scope>
+</dependency>
+----
+
+== Usage
+
+Package: `guru.mikelue.foxglove.springframework`
+
+* Use {foxglove-javadoc-link}/springframework/EnableFoxglove.html[EnableFoxglove] with your SpringFramework tests.
+* Or add {foxglove-javadoc-link}/springframework/FoxgloveTestListener.html[FoxgloveTestListener] to {springframework-javadoc-link}/test/context/TestExecutionListeners.html[TestExecutionListeners] of your test class.
+
+== Examples
+
+* link:/examples/junit5/[JUnit 5 Examples] for more examples of usage for `@GenData`, `@DataGeneratorSource` and `@TableFacetsSource`.
+* link:/examples/springframework/[SpringFramwork Examples] for more examples of application context and class-level sources for Foxglove.
+** `SampleTestConfig` is shown in this page
+
+[source,java]
+----
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.jdbc.JdbcTestUtils;
+
+import guru.mikelue.foxglove.TableFacet;
+import guru.mikelue.foxglove.annotation.GenData;
+import guru.mikelue.foxglove.annotation.TableFacetsSource;
+import guru.mikelue.foxglove.jdbc.JdbcTableFacet;
+import guru.mikelue.foxglove.springframework.EnableFoxglove;
+
+include::{example-dir}/SpringFrameworkTest.java[tag=springframworkTest,indent=0]
+}
+----
+
+== References
+
+* {springboot-javadoc-link}/test/autoconfigure/jdbc/JdbcTest.html[@JdbcTest]
+* {springboot-javadoc-link}/test/autoconfigure/orm/jpa/DataJpaTest.html[@DataJpaTest]

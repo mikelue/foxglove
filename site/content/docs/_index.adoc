@@ -1,0 +1,41 @@
++++
+title = 'Docs'
+weight = 20
++++
+
+:datasource_link: {jdk-doc}/java.sql/javax/sql/DataSource.html[DataSource]
+:connection_link: {jdk-doc}/java.sql/java/sql/Connection.html[Connection]
+:supplier_link: {jdk-doc}/java.base/java/util/function/Supplier.html[Supplier]
+
+== Core objects
+
+* link:/docs/table-facet/[Table Facet] - Defines logics for generating data for a specific table.
+* link:/docs/settings/[Settings] - Defines fallback generators by matching type of a column or customizing rules.
+* link:/docs/default-generators/[Default Generators] - Default rules defined by default {foxglove-javadoc-link}/setting/DataSetting.html[DataSetting].
+
+== Core packages
+
+Java package: `guru.mikelue.foxglove`
+
+* {foxglove-javadoc-link}/DataGenerator.html[DataGenerator] - the abstract interface defining the operation to database.
+* {foxglove-javadoc-link}/TableFacet.html[TableFacet] - the abstract interface defining basic information of a table.
+* {foxglove-javadoc-link}/ColumnMeta.html[ColumnMeta] - The read-only object of columns' metadata.
+
+Java package: `guru.mikelue.foxglove.jdbc`
+
+* {foxglove-javadoc-link}/jdbc/JdbcDataGenerator.html[JdbcDataGenerator] - The main service class processing {foxglove-javadoc-link}/jdbc/JdbcTableFacet.html[JdbcTableFacet] by using {datasource_link}(or {connection_link})
+* {foxglove-javadoc-link}/jdbc/JdbcTableFacet.html[JdbcTableFacet] - the main type providing an intance of {foxglove-javadoc-link}/TableFacet.html[TableFacet].
+** `JdbcTableFacet.builder(String)` - *The builder* for a {foxglove-javadoc-link}/jdbc/JdbcTableFacet.html[JdbcTableFacet] instance.
+
+Java package: `guru.mikelue.foxglove.setting`
+
+* {foxglove-javadoc-link}/setting/DataSetting.html[DataSetting] - The main object for fallback setting used by {foxglove-javadoc-link}/DataGenerator.html[DataGenerator] and {foxglove-javadoc-link}/TableFacet.html[TableFacet].
+
+Java package: `guru.mikelue.foxglove.functional`
+
+* {foxglove-javadoc-link}/functional/Int4SequenceSupplier.html[Int4SequenceSupplier], {foxglove-javadoc-link}/functional/Int8SequenceSupplier.html[Int8SequenceSupplier] - The built-in sequence suppliers for integral sequence numbers.
+* {foxglove-javadoc-link}/functional/RoundRobinValueSupplier.html[RoundRobinValueSupplier] - The built-in round-robin value supplier.
+* {foxglove-javadoc-link}/functional/ColumnMatcher.html[ColumnMatcher] - The predicate interface to match {foxglove-javadoc-link}/ColumnMeta.html[ColumnMeta].
+** Mostly used with `JdbcTableFacet.Builder` or {foxglove-javadoc-link}/setting/DataSetting.html[DataSetting]
+* {foxglove-javadoc-link}/functional/SupplierDecider.html[SupplierDecider] - The functional interface to decide a {supplier_link} by a {foxglove-javadoc-link}/ColumnMeta.html[ColumnMeta].
+** Mostly used with `JdbcTableFacet.Builder` or {foxglove-javadoc-link}/setting/DataSetting.html[DataSetting]

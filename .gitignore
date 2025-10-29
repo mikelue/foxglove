@@ -1,0 +1,69 @@
+site/public/**
+site/static/images/generated/*
+site/.asciidoctor/**
+site/resources/_gen/**
+
+# Maven specific
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE specific files
+# Eclipse
+.settings/
+.classpath
+.project
+.factorypath
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.idea_modules/
+
+# NetBeans
+nbproject/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+nb-configuration.xml
+nbactions.xml
+
+# VS Code
+.vscode/
+.code-workspace
+
+# Build tools
+build/
+bin/
+
+# Logs
+logs/
+*.log
+log/
+*.gz
+
+# OS specific files
+.DS_Store
+Thumbs.db
+.directory
+*~
+
+# Java specific
+*.class
+hs_err_pid*
+
+# Misc
+.flattened-pom.xml
+.env
+node_modules/

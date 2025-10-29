@@ -1,0 +1,11 @@
++++
+title = 'Examples'
+weight = 30
++++
+
+The examples in this section with following database schema(see `SampleSchema.java`):
+
+[source,sql]
+----
+include::{test-resource-dir}/car-renting.sql[]
+----

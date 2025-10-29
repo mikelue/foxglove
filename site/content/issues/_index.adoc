@@ -1,0 +1,5 @@
++++
+title = 'Issue/Thinking/Concept'
+description = 'Pages for issues, thinking and concepts'
+weight = 100
++++

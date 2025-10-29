@@ -1,0 +1,111 @@
++++
+title = 'JUnit 5'
+description = 'Nested class, field and method level examples for @GenData'
+weight = 8
++++
+
+:tableFacetsprovider-link: {foxglove-javadoc-link}/functional/TableFacetsProvider.html
+
+See link:/quickstart/table-facet/[quick start(facet)] for snippets of link:/docs/table-facet/[Table Facet].
+
+.Importing
+[source,java]
+----
+import org.junit.jupiter.api.Nested;
+
+import guru.mikelue.foxglove.annotation.DataGeneratorSource;
+import guru.mikelue.foxglove.annotation.GenData;
+import guru.mikelue.foxglove.annotation.TableFacetsSource;
+import guru.mikelue.foxglove.functional.TableFacetProvider;
+import guru.mikelue.foxglove.jdbc.JdbcTableFacet;
+----
+
+---
+
+.Default DataGenerator
+[source,java]
+----
+include::{example-dir}/JUnit5ExtensionTestBase.java[tag=dataGeneratorSource,indent=0]
+----
+
+== Basic usage
+
+.By fields
+[source,java]
+----
+include::{example-dir}/JUnit5SimpleTest.java[tag=tableFacetFields,indent=0]
+    /* ... */
+}
+----
+
+include::content/snippets/jdbc-tablefacet-warning.adoc[]
+
+.By methods
+[source,java]
+----
+include::{example-dir}/JUnit5SimpleTest.java[tag=tableFacetMethods,indent=0]
+	/* ... */
+}
+----
+
+.By provider class
+[source,java]
+----
+include::{example-dir}/JUnit5SimpleTest.java[tag=tableFacetProviderClass,indent=0]
+	/* ... */
+}
+----
+
+.By named sources
+[source,java]
+----
+include::{example-dir}/JUnit5SimpleTest.java[tag=tableFacetWithName,indent=0]
+	/* ... */
+}
+----
+
+---
+
+References: {tableFacetsprovider-link}[TableFacetsProvider]
+
+== List, Stream, or array of TableFacets
+
+.By array
+[source,java]
+----
+include::{example-dir}/JUnit5SimpleTest.java[tag=tableFacetsOfArray,indent=0]
+	/* ... */
+}
+----
+
+.By list
+[source,java]
+----
+include::{example-dir}/JUnit5SimpleTest.java[tag=tableFacetsOfList,indent=0]
+	/* ... */
+}
+----
+
+.By stream
+[source,java]
+----
+include::{example-dir}/JUnit5SimpleTest.java[tag=tableFacetsOfStream,indent=0]
+	/* ... */
+}
+----
+
+---
+
+References: {jdk-doc}/java.base/java/util/List.html[List], {jdk-doc}/java.base/java/util/stream/Stream.html[Stream]
+
+== Nested test class
+
+.Use sources of enclosing class
+[source,java]
+----
+include::{example-dir}/JUnit5SimpleTest.java[tag=useTableFacetOfEnclosingClass,indent=0]
+----
+
+---
+
+References: https://docs.junit.org/current/user-guide/#writing-tests-nested-tests[Nested Tests]

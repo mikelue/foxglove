@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset comparisonMethod="maven"
+         xmlns="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://mojo.codehaus.org/versions-maven-plugin/rule/2.0.0
+                             http://mojo.codehaus.org/versions-maven-plugin/xsd/rule-2.0.0.xsd">
+    <ignoreVersions>
+        <ignoreVersion type="regex">.*[-_\.](alpha|Alpha|ALPHA|a)[-_\.]?\d*</ignoreVersion>
+        <ignoreVersion type="regex">.*[-_\.](beta|Beta|BETA|b)[-_\.]?\d*</ignoreVersion>
+        <ignoreVersion type="regex">.*[-_\.](milestone|Milestone|MILESTONE|m|M)[-_\.]?\d*</ignoreVersion>
+        <ignoreVersion type="regex">.*[-_\.](rc|RC|cr|CR)[-_\.]?\d*</ignoreVersion>
+        <ignoreVersion type="regex">.*[-_\.](snapshot|Snapshot|SNAPSHOT)</ignoreVersion>
+        <ignoreVersion type="regex">.*[-_\.]preview[-_\.]?\d*</ignoreVersion>
+        <ignoreVersion type="regex">.*[-_\.]ea[-_\.]?\d*</ignoreVersion>
+        <!-- Exclude versions like 6.0.0, 3.0.0, etc. (major.0.0) -->
+        <ignoreVersion type="regex">\d+\.0\.0</ignoreVersion>
+    </ignoreVersions>
+</ruleset>

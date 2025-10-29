@@ -1,0 +1,103 @@
+:foxglove-url: https://foxglove.mikelue.guru
+:instancio-link: https://www.instancio.org/user-guide/[Instancio]
+
+https://foxglove.mikelue.guru/[image:https://img.shields.io/badge/Foxglove-darkorange?logo=googlehome&labelColor=lightgreen[Official Foxglove Site]]
+https://github.com/mikelue/foxglove[image:https://img.shields.io/badge/Git-Foxglove-darkorange?logo=github&labelColor=lightslategray[Git Repository GitHub]]
+https://foxglove.mikelue.guru/maven-site/project-info.html[image:https://img.shields.io/badge/Foxglove-darkorange?logo=apachemaven&label=Maven%20Site&labelColor=lightslategray[Project information Maven site]]
+https://foxglove.mikelue.guru/maven-site/apidocs/[image:https://img.shields.io/badge/Foxglove-darkorange?logo=htmx&label=Javadoc&labelColor=lightslategray[Javadocs]]
+
+
+https://github.com/mikelue/foxglove/commits/main/[image:https://img.shields.io/github/last-commit/mikelue/foxglove?logo=git&labelColor=bisque&color=lightsteelblue[Last Commit]]
+https://github.com/mikelue/foxglove/actions/workflows/maven-publish.yml[image:https://img.shields.io/github/actions/workflow/status/mikelue/foxglove/maven-publish.yml?branch=main&logo=githubactions&label=Build&labelColor=goldenrod&color=lightgreen[Maven Publish]]
+https://foxglove.mikelue.guru/clover/[image:https://img.shields.io/badge/OpenClover-darkgoldenrod?logo=codecov&label=Code%20Coverage&labelColor=mediumaquamarine[OpenClover Report]]
+https://github.com/mikelue/foxglove?tab=MIT-1-ov-file#readme[image:https://img.shields.io/github/license/mikelue/foxglove?labelColor=steelblue&color=skyblue[MIT License]]
+
+## Motivation
+
+When we are preparing data of RDB for tests, the tedious and tricky part is to write correct https://en.wikipedia.org/wiki/Data_manipulation_language[DML] for data insertion.
+{foxglove-url}[Foxglove] is a library that helps you to generating data by auto schema-inspection and table facet(rules to generate data).
+
+While preparing data for unit tests over databases, the key things are:
+
+. Preparing values for columns in `WHERE` clause of SQL or clause may *FILTERING* data(e.g. `INNER JOIN`).
+. Some critical values to be asserted or counting number of results affected by exercised SQL.
+. While tearing down the tests, you may like to delete only the data you have inserted.
+	* Specify some fixed values to irrelevant columns could help
+
+That is, how {foxglove-url}[Foxglove] helps you:
+
+. Just provide values for specified columns.
+. Give the critical values you need to check.
+. Don't have to care about irrelevant, _non-nullable(and no default value)_ columns.
+
+Other data that is irrelevant to your tests will be _generated automatically_ by {foxglove-url}[Foxglove].
+
+---
+
+.Preparing data
+[source,java]
+----
+// Generates 4 rows with "cr_brand "fixed to "Toyota" and
+// 4 different values on "cr_model"
+var facet = JdbcTableFacet.builder(TABLE_CAR)
+    .numberOfRows(4)
+    .column("cr_brand")
+        .fixed("Toyota")
+    .column("cr_model")
+        .roundRobin("Corolla", "Camry", "RAV4", "Prius")
+    .build();
+
+new JdbcDataGenerator(getDataSource())
+    .generate(facet);
+----
+
+The data could be used for:
+
+. There could be `0 ~ 1` matched row for any query of the SQL
++
+[source,sql]
+----
+SELECT *
+FROM ap_car
+WHERE cr_brand = ?
+    AND cr_model = ?
+----
+
+. Since `cr_created_at` will be generated randomly by default,
+	you can check the values of the column for the correctness of ordering.
++
+[source,sql]
+----
+SELECT *
+FROM ap_car
+WHERE cr_brand = ?
+ORDER BY cr_created_at DESC
+----
+
+## Requirements
+
+* https://openjdk.org/projects/jdk/17/[Java 17+]
+
+## Integration
+
+* See {foxglove-url}/quickstart/junit[JUnit 5 Quick Start] for usage with https://docs.junit.org/current/user-guide/[JUnit 5].
+* See {foxglove-url}/quickstart/springframework[SpringFramework Quick Start] for usage with https://docs.spring.io/spring-framework/reference/6.0/testing/support-jdbc.html[SprinFramwork - JDBC Testing Support].
+
+## Documentations
+
+* {foxglove-url}/quickstart/[Quick starts], {foxglove-url}/docs/[Docs]
+* {foxglove-url}/maven-site/apidocs[Javadocs(Maven Site)], {foxglove-url}/maven-site/project-info.html[Maven Site]
+
+## Installation
+
+See {foxglove-url}/quickstart[Quick start] for details.
+
+## Credits
+
+Thanks to {instancio-link} project for its excellent data generation capabilities.
+
+https://docs.junit.org/current/user-guide/[image:https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmikelue%2Ffoxglove%2Frefs%2Fheads%2Fmain%2Fpom.xml&query=%2F*%5Blocal-name()%3D%27project%27%5D%2F*%5Blocal-name()%3D%27properties%27%5D%2F*%5Blocal-name()%3D%27version.junit%27%5D&logo=junit5&label=JUnit["Dynamic XML Badge"]]
+https://docs.spring.io/spring-framework/reference/6.0/index.html[image:https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmikelue%2Ffoxglove%2Frefs%2Fheads%2Fmain%2Fpom.xml&query=%2F*%5Blocal-name()%3D%27project%27%5D%2F*%5Blocal-name()%3D%27properties%27%5D%2F*%5Blocal-name()%3D%27version.spring%27%5D&logo=spring&label=SpringFramework[SpringFramework]]
+link:https://docs.spring.io/spring-boot/docs/3.1.x/reference/html/[image:https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmikelue%2Ffoxglove%2Frefs%2Fheads%2Fmain%2Fpom.xml&query=%2F*%5Blocal-name()%3D%27project%27%5D%2F*%5Blocal-name()%3D%27properties%27%5D%2F*%5Blocal-name()%3D%27version.spring-boot%27%5D&logo=springboot&label=SpringFramework[SpringBoot]]
+link:https://www.instancio.org/user-guide/[image:https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmikelue%2Ffoxglove%2Frefs%2Fheads%2Fmain%2Fpom.xml&query=%2F*%5Blocal-name()%3D%27project%27%5D%2F*%5Blocal-name()%3D%27properties%27%5D%2F*%5Blocal-name()%3D%27version.spring-boot%27%5D&logo=springboot&label=SpringFramework[Instancio]]
+link:https://openclover.org/documentation[image:https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmikelue%2Ffoxglove%2Frefs%2Fheads%2Fmain%2Fpom.xml&query=%2F*%5Blocal-name()%3D%27project%27%5D%2F*%5Blocal-name()%3D%27properties%27%5D%2F*%5Blocal-name()%3D%27version.plugin.clover%27%5D&logo=codecov&label=OpenClover[OpenClover]]

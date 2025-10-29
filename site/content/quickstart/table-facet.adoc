@@ -1,0 +1,108 @@
++++
+title = 'Table Facet'
+description = 'Quick start to define a table facet'
+weight = 10
++++
+
+* A *table facet* is the rules about rows to be generated for _a database table_.
+* Use `JdbcTableFacet.builder()` to define a table facet.
+* The default number of rows is *`1024`*.
+
+Java package: `guru.mikelue.foxglove.jdbc`
+
+[#setting]
+== Setting
+
+.Use DataSetting on table
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=settingOnTable,indent=0]
+----
+
+== Set number of rows
+
+.Fixed number of rows
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=numberOfRows,indent=0]
+----
+
+.Bound range of a key column
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=keyColumn,indent=0]
+----
+
+.Cartesian product across columns
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=cartesianProduct,indent=0]
+----
+
+== Column generators
+
+.Fixed value
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=fixed,indent=0]
+----
+
+.Custom random values
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=randomValue,indent=0]
+----
+
+.Round robin values
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=roundRobin,indent=0]
+----
+
+.Sequence number
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=sequenceNumber,indent=0]
+----
+
+.Null value(Instancio)
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=nullByInstancio,indent=0]
+----
+
+.Null value(customize odds)
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=nullByCustomizedOdds,indent=0]
+----
+
+== Referencing another table
+
+.Referencing(control number of rows)
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=referencing,indent=0]
+----
+
+.Use values of another table as domain
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=from,indent=0]
+----
+
+See link:/examples/many-to-many/[Many-to-Many relationship] for more examples about referencing another table.
+
+== After generation hook
+
+.Change generated rows
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=onTupleGenerated,indent=0]
+----
+
+== References
+
+- link:/docs/table-facet/[Table Facet] - Defines logics for generating data for a specific table.
+- link:/docs/settings/[Settings] - Defines logics for generating data by data type, etc.
+- {instancio-core-doc}/org/instancio/InstancioGenApi.html[InstancioGenApi] - For generating random values.

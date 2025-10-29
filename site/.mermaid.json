@@ -1,0 +1,62 @@
+{
+	"fontFamily": "\"Noto Sans Mono\",\"Ubuntu Sans Mono\",monospace",
+	"theme": "base",
+	"themeVariables": {
+		"fontSize": "19px",
+		"darkMode": true,
+    "primaryColor": "#76ABAE",
+    "primaryTextColor": "#EEEEEE",
+    "primaryBorderColor": "#76ABAE",
+    "lineColor": "#A27B5C",
+    "secondaryColor": "#3F4F44",
+    "tertiaryColor": "#DCD7C9",
+
+    "mainBkg": "#222831",
+    "secondaryBkg": "#31363F",
+    "mainContrastColor": "#EEEEEE",
+    "darkTextColor": "#2C3930",
+    "textColor": "#EEEEEE",
+    "altTextColor": "#DCD7C9",
+    "nodeBorder": "#76ABAE",
+    "clusterBkg": "#31363F",
+    "clusterBorder": "#3F4F44",
+    "titleColor": "#EEEEEE",
+    "edgeLabelBackground": "#2C3930",
+
+    "actorBorder": "#76ABAE",
+    "actorBkg": "#31363F",
+    "actorTextColor": "#EEEEEE",
+    "actorLineColor": "#A27B5C",
+
+    "signalColor": "#EEEEEE",
+    "signalTextColor": "#EEEEEE",
+    "labelBoxBkgColor": "#222831",
+    "labelBoxBorderColor": "#76ABAE",
+    "labelTextColor": "#EEEEEE",
+
+    "loopTextColor": "#EEEEEE",
+    "noteBorderColor": "#A27B5C",
+    "noteBkgColor": "#2C3930",
+    "noteTextColor": "#DCD7C9",
+
+    "activationBorderColor": "#76ABAE",
+    "activationBkgColor": "#3F4F44",
+
+    "sequenceNumberColor": "#EEEEEE",
+    "sectionBkgColor": "#2C3930",
+    "sectionBkgColor2": "#31363F",
+    "altSectionBkgColor": "#31363F",
+    "taskBorderColor": "#76ABAE",
+    "taskBkgColor": "#222831",
+    "taskTextColor": "#EEEEEE",
+    "taskTextLightColor": "#DCD7C9",
+    "taskTextOutsideColor": "#EEEEEE",
+
+    "gridColor": "#A27B5C",
+    "doneTaskBkgColor": "#3F4F44",
+    "doneTaskBorderColor": "#76ABAE",
+    "critBkgColor": "#A27B5C",
+    "critBorderColor": "#DCD7C9",
+    "todayLineColor": "#76ABAE"
+	}
+}

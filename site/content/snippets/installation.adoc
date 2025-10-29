@@ -1,0 +1,86 @@
+.Maven `pom.xml`
+[source,xml]
+----
+<repositories>
+    <repository>
+        <id>foxglove-repo</id>
+        <name>Foxglove Maven Repository</name>
+        <url>https://maven.pkg.github.com/mikelue/foxglove</url>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>guru.mikelue.foxglove</groupId>
+    <artifactId>core</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <scope>test</scope>
+</dependency>
+----
+
+.GitHub Maven registry authentication(`$HOME/.m2/settings.xml`)
+[source,xml]
+----
+<servers>
+    <server>
+        <id>foxglove-repo</id>
+        <username>mikelue</username>
+        <password>your_token</password>
+    </server>
+</servers>
+----
+
+Don't forget to create a https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens?versionId=free-pro-team%40latest&productId=packages&restPage=working-with-a-github-packages-registry%2Cworking-with-the-apache-maven-registry[PAT](_personal access token_) on GitHub.
+
+* https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry[Woking with Maven registry(GitHub)]
+
+---
+
+.Gradle
+[source,groovy]
+----
+repositories {
+    maven {
+        name 'foxglove-repo'
+        url 'https://maven.pkg.github.com/mikelue/foxglove'
+    }
+}
+
+testImplementation 'guru.mikelue.foxglove:core:1.0-SNAPSHOT'
+----
+
+---
+
+.SBT
+[source,scala]
+----
+resolvers += "foxglove-repo" at "https://maven.pkg.github.com/mikelue/foxglove"
+
+libraryDependencies += "guru.mikelue.foxglove" % "core" % "1.0-SNAPSHOT" % Test
+----
+
+---
+
+.`ivysettings.xml`
+[source,xml]
+----
+<ivysettings>
+    <settings defaultResolver="chain"/>
+    <resolvers>
+        <chain name="chain">
+            <ibiblio name="foxglove-repo"
+                     m2compatible="true"
+                     root="https://maven.pkg.github.com/mikelue/foxglove"
+                     pattern="[organisation]/[module]/[revision]/[artifact]-[revision](-[classifier]).[ext]"/>
+        </chain>
+    </resolvers>
+</ivysettings>
+----
+
+.Ivy
+[source,xml]
+----
+<dependency org="guru.mikelue.foxglove" name="core" rev="1.0-SNAPSHOT" conf="test"/>
+----

@@ -1,0 +1,6 @@
+.paragraph .image,
+.paragraph .image img {
+    display: inline !important;
+    vertical-align: middle;
+    margin: 0 0.2em;
+}

@@ -1,0 +1,53 @@
++++
+title = 'Database-related settings'
+description = 'About settings on databases'
+weight = 100
++++
+
+== Transaction
+
+* The insertions of generated data would be collected into batches bound by transactions.
+* `JdbcDataGenerator.setBatchSize(int)` decides the batch size for a transaction.
+* The default batch size is `1024`.
+
+== Tests on databases/JDBC drivers
+
+.Tested Databases and JDBC Drivers
+[cols="2,2,2"]
+|===
+|Database System
+|JDBC Driver
+|Note
+
+|https://www.h2database.com/html/main.html[H2 Database Engine]
+|https://central.sonatype.com/artifact/com.h2database/h2[com.h2database:h2] (`2.4.240`)
+|mode is `regular`, by local file
+
+|https://www.h2database.com/html/main.html[HyperSQL]
+|https://central.sonatype.com/artifact/org.hsqldb/hsqldb[org.hsqldb:hsqldb] (`2.7.4`)
+|by local file
+
+|https://db.apache.org/derby/[Apache Derby]
+|https://central.sonatype.com/artifact/org.apache.derby/derby[org.apache.derby:derby] (`10.17.1.0`)
+|by local file
+
+|https://github.com/xerial/sqlite-jdbc[Sqlite](`xerial/sqlite-jdbc`)
+|https://central.sonatype.com/artifact/org.xerial/sqlite-jdbc[org.xerial:sqlite-jdbc] (`3.42.0.0`)
+|by local file
+
+|https://www.postgresql.org/docs/16/index.html[PostgreSQL 16]
+|https://central.sonatype.com/artifact/org.postgresql/postgresql[org.postgresql:postgresql] (`42.7.8`)
+|
+
+|https://dev.mysql.com/doc/refman/8.4/en/[MySQL 8.4]
+|https://central.sonatype.com/artifact/com.mysql/mysql-connector-j[com.mysql:mysql-connector-j] (`9.5.0`)
+|
+
+|https://learn.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver16[Microsoft SQL Server 2022(16.x)]
+|https://central.sonatype.com/artifact/com.microsoft.sqlserver/mssql-jdbc[com.microsoft.sqlserver:mssql-jdbc] (`11.2.3.jre17`)
+|
+
+|https://docs.oracle.com/en/database/oracle/oracle-database/21/development.html[Oracle Database Free]
+|https://central.sonatype.com/artifact/com.oracle.database.jdbc/ojdbc17[com.oracle.database.jdbc:ojdbc17] (`23.9.0.25.07`)
+|by docker image: https://hub.docker.com/r/gvenzl/oracle-free[gvenzl/oracle-free:slim-faststart]
+|===

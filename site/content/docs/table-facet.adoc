@@ -1,0 +1,239 @@
++++
+title = 'Table Facet'
+description = 'Usage of TableFacet to control data generation for a table'
+weight = 15
++++
+
+:supplier_link: {jdk-doc}/java.base/java/util/function/Supplier.html[Supplier]
+:function_link: {jdk-doc}/java.base/java/util/function/Function.html[Function]
+:jdbc_type_link: {jdk-doc}/java.sql/java/sql/JDBCType.html[java.sql.JDBCType]
+:predicate_link: {jdk-doc}/java.base/java/util/function/Predicate.html[Predicate]
+:ddl_link: https://en.wikipedia.org/wiki/Data_definition_language[DDL]
+
+== Overview
+
+Inspired by https://www.instancio.org/user-guide/#selectors[_selector_ of Instancing], {floxglove-link} provides several ways to specify the mapping between columns and generators for {foxglove-javadoc-link}/TableFacet.html[TableFacet].
+
+`JdbcTableFacet.Builder` is the entry point to define value generators on columns of a table.
+
+Packages:
+
+* `guru.mikelue.foxglove.jdbc` - The main package providing {foxglove-javadoc-link}/jdbc/JdbcDataGenerator.html[JdbcDataGenerator] and {foxglove-javadoc-link}/jdbc/JdbcTableFacet.html[JdbcTableFacet].
+
+---
+
+Code convention:
+
+* `gen()` - an instance of {instancio-core-doc}/org/instancio/InstancioGenApi.html[InstancioGenApi].
+
+---
+
+.Versatile example of builder
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=versatileConfiguration,indent=0]
+----
+
+=== Value generators
+
+The way to choose which columns to be applied:
+
+* Use `Builder.column(String)` to specify a column by name and set up value generator.
+* By `DataSetting`, you can use {jdbc_type_link}, _type name_, or {foxglove-javadoc-link}/functional/ColumnMatcher.html[ColumnMatcher](a {predicate_link} for {foxglove-javadoc-link}/ColumnMeta.html[ColumnMeta]) for choosing columns.
+
+NOTE: You could use `DataGenerator.withSetting(DataSetting)` that change the way to choose {supplier_link} automatically.
+
+See link:/docs/settings/[Settings] for more details about `DataSetting`.
+
+---
+
+A value generator can be:
+
+* An instance of {supplier_link} - by `useSupplier(Supplier<T>)`
+* A {function_link} - turns a {foxglove-javadoc-link}/ColumnMeta.html[ColumnMeta] to a {Supplier} - by `decideSupplier(SupplierDecider<T>)`
+* A {jdk-doc}/java.base/java/util/function/Supplier.html[Supplier] of `ValueSpec` - by `useValueSpec(Supplier<ValueSpce<T>>)`
+* A `RowIndexToValue`(as {function_link}) - turns row indexes to values - by `forRow(RowIndexToValue<T>)`
+
+:InstancioGenApi_link: {instancio-core-doc}/org/instancio/InstancioGenApi.html[InstancioGenApi]
+:ValueSpec_link: {instancio-core-doc}/org/instancio/generators/ValueSpecs.html[ValueSpec]
+
+NOTE: You can use {InstancioGenApi_link} (providing bunch of {ValueSpec_link}s)
+to create {supplier_link} for any kind of random data.
+
+=== By predicate of column
+
+Use `Builder.withSetting(DataSetting)` to specify a generator by {jdbc_type_link}, _type name_, or {foxglove-javadoc-link}/functional/ColumnMatcher.html[ColumnMatcher](a {predicate_link} for {foxglove-javadoc-link}/ColumnMeta.html[ColumnMeta]).
+
+---
+
+.Predicate example
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=settingOnTable,indent=0]
+----
+
+== Include/Exclude columns
+
+Except specifying columns one by one by `Builder.column(String)`,
+following methods filter columns to be included/excluded for data generation automatically:
+
+* `Builder.includeColumns(String...)` - Only these columns will to be generated automatically(`DataSetting`),
+	whatever the properties(e.g. https://www.postgresql.org/docs/current/ddl-generated-columns.html[Generated Columns(PostgreSQL)]) they have.
+** {foxglove-javadoc-link}/jdbc/JdbcDataGenerator.html[JdbcDataGenerator] would throw error if no supplier can be found.
+** If you would like to use default value defined by {ddl_link}, *don't put* the column name in this list.
+* `Builder.excludeColumns(String...)` - columns must not to be generated automatically.
+** Undefined columns are decided by `DataSetting`. This logic is differ from `includeColumns()`.
+** If you would like to use default value defined by {ddl_link}, *put* the column name in this list.
+
+Above two methods are mutually exclusive.
+
+---
+
+.Include columns
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=includeColumns,indent=0]
+----
+
+.Exclude columns
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=excludeColumns,indent=0]
+----
+
+== The number of rows
+
+You can only use *one of the following ways* to specify the number of rows for a table:
+
+* Use `Builder.numberOfRows(int)` to set a fixed number of rows.
+* Use `Builder.keyOfInt(String)` to set a key column, which must be integral type(`INT`, `BIGINT`, etc).
+* Use `Builder.cartesianProduct(String)` to set up domain for columns(at least one)
+* Use `Builder.referencing(String)` to set up referencing to another table's column.
+
+---
+
+[NOTE]
+====
+If you would like to use domain of fixed values but the column is not integral type.
+There are ways to achieve that:
+
+.Define normal column
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=fixedDomain,indent=0]
+----
+
+.Cartesian product on only one column
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=cartesianProductOnOneColumn,indent=0]
+----
+====
+
+=== Fix number of rows
+
+.Fixed number of rows
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=numberOfRows,indent=0]
+----
+
+=== Key range
+
+When using `keyOfInt(String)`, you can specify the range of key values by:
+
+* `range(start, end)` - With start(_inclusive_) number and end(_exclusive_) number.
+* `limit(long, int)` - With start(_inclusive_) number and fixed number of rows.
+
+---
+
+.Key column
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=keyColumn,indent=0]
+----
+
+NOTE: You can only use one column as key column.
+
+* _The `keyOfInt(String)` is not about uniqueness, is about defining the number of rows._
+* However, the database is likely having uniqueness constraint on the column.
+
+=== Cartesian product of columns
+
+.Cartesian product
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=cartesianProduct,indent=0]
+----
+
+---
+
+.Cartesian product by referencing
+[source,java]
+----
+include::{example-dir}/ManyToManyTest.java[tag=cartesianProductByReferencing,indent=0]
+----
+
+=== Referencing to another table
+
+_Only one column can be used for referencing._
+
+---
+
+Referencing column
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=referencing,indent=0]
+----
+
+You can use `.column(String).from(JdbcTableFacet, String)` to uses values of another table's column as domain.
+
+See link:#other-generator[Other generators] section for using values of another table's column as domain values.
+
+== Sequence number
+
+You can use {foxglove-javadoc-link}/functional/Int4SequenceSupplier.html[Int4SequenceSupplier] or {foxglove-javadoc-link}/functional/Int8SequenceSupplier.html[Int8SequenceSupplier] to define sequence number on a column.
+
+---
+
+.Sequence number generator
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=sequenceNumber,indent=0]
+----
+
+[#other-generator]
+== Other kinds of value generator
+
+* `fix(value)` - Use a fixed value on the column.
+* `roundRobin(...)` - Round robin provided value on the column.
+* `from(JdbcTableFacet, String)` - Copy values from another table's column.
+** You can combine with other generator(e.g. `roundRobin()`, `random()`) to control how to pick value from source column.
+
+---
+
+.From values of column of another table
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=from,indent=0]
+----
+
+== Change row values
+
+After a row get generated, which is type of `TupleAccessor` object,
+you can change the row by `Builder.onTupleGenerated(Consumer<RowAccessor>)`.
+
+NOTE: Only values of included columns can be changed.
+
+.Modifying row
+[source,java]
+----
+include::{example-dir}/TableFacetTest.java[tag=onTupleGenerated,indent=0]
+----
+
+---
+
+References:
+
+* link:/docs/settings/[Settings] - for more details about `DataSetting`
+* link:/docs/default-generators/[Default Generators] - for default generators

@@ -1,0 +1,75 @@
+baseURL = 'https://foxglove.mikelue.guru/'
+languageCode = 'en-us'
+title = 'Foxglove'
+theme = 'relearn'
+
+[taxonomies]
+	tag = 'tags'
+
+[security.exec]
+	allow = [ 'asciidoctor' ]
+
+[markup.asciidocExt]
+	extensions = ['asciidoctor-html5s', 'asciidoctor-diagram', 'asciidoctor-mermaid' ]
+	backend = "html5"
+	failureLevel = "fatal"
+	noHeaderOrFooter = true
+	preserveTOC = false
+	safeMode = "unsafe"
+	sectionNumbers = false
+	trace = false
+	verbose = false
+	workingFolderCurrent = false
+
+[markup.asciidocExt.attributes]
+	toc = true
+	source-highlighter = 'rouge'
+    tabsize = 4
+    imagesoutdir = "static/images/generated"  # Directory for generated images
+    imagesdir = "/images/generated"
+	# /
+	# For PlantUML
+	# /
+	plantuml-config = ".plantuml.txt"
+	plantuml-native = "~/Code/bin/plantuml.jar"
+	# :~)
+	# /
+	# For Mermaid
+	# /
+	mermaid-config = ".mermaid.json"
+	mermaid-background = "#283149"
+	# :~)
+	# /
+	# Directory related attributes
+	# /
+	test-resource-dir = "../src/test/resources"
+	test-dir = "../src/test/java/guru/mikelue/foxglove"
+	example-dir = "../src/test/java/guru/mikelue/foxglove/examples"
+	example-resource-dir = "../src/test/resources/guru/mikelue/foxglove/examples"
+	# :~)
+	# /
+	# Version related attributes
+	# /
+	java-version = 17
+	jdk-doc = "https://docs.oracle.com/en/java/javase/17/docs/api"
+	instancio-core-doc = "https://javadoc.io/doc/org.instancio/instancio-core/latest"
+	# :~)
+	# /
+	# Links
+	# /
+	foxglove-link = "link:/[Foxglove]"
+	foxglove-javadoc-link = "link:/maven-site/apidocs/guru/mikelue/foxglove"
+	instancio-link = "https://www.instancio.org/user-guide/[Instancio]"
+	junit5-link = "https://docs.junit.org/current/user-guide/[JUnit 5]"
+	junit5-javadoc-link = "https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api"
+
+	springframework-link = "https://docs.spring.io/spring-framework/reference/6.0/overview.html[SpringFramework]"
+	springframework-javadoc-link = "https://docs.spring.io/spring-framework/docs/6.0.x/javadoc-api/org/springframework"
+	springboot-link = "https://docs.spring.io/spring-boot/docs/3.1.x/reference/html/[SpringBoot]"
+	springboot-javadoc-link = "https://docs.spring.io/spring-boot/docs/3.1.x/api/org/springframework/boot"
+
+	tableFacet-link = "link:/maven-site/apidocs/guru/mikelue/foxglove/TableFacet.html[TableFacet]"
+	# :~)
+
+[markup.highlight]
+	tabWidth = 4

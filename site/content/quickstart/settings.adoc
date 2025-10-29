@@ -1,0 +1,99 @@
++++
+title = 'Settings'
+description = 'Quick start to use DataSetting'
+weight = 20
++++
+
+NOTE: the configuration in {foxglove-javadoc-link}/jdbc/JdbcTableFacet.html[JdbcTableFacet] takes precedence over the global setting.
+
+Java package: `guru.mikelue.foxglove.setting`
+
+* A setting controls the fallback behavior of data generation.
+
+== Setting on table facet
+
+See: link:/quickstart/table-facet/#setting[Table Facet - Setting]
+
+== Setting on DataGenerator
+
+.Use DataSetting on DataGenerator
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=onDataGenerator,indent=0]
+----
+
+== Global setting
+
+.Change setting globally
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=globalSetting,indent=0]
+----
+
+== Configurations
+
+=== Suppliers by rules
+
+NOTE: see {jdk-doc}/java.sql/java/sql/DatabaseMetaData.html#getColumns(java.lang.String,java.lang.String,java.lang.String,java.lang.String)[DatabaseMetaData.getColumns(...)] for detail of metadata.
+
+.By JDBCType
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=byJdbcType,indent=0]
+----
+
+.By type name
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=byTypeName,indent=0]
+----
+
+.By column matcher
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=byColumnMatcher,indent=0]
+----
+
+=== Auto-generating behavior
+
+.By column's properties
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=autoGenerating,indent=0]
+----
+
+.By condition of exclusion
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=excludeWhen,indent=0]
+----
+
+=== Generating null values
+
+The control the generation of null values on *_NULLABLE COLUMNS_*.
+
+.Default dicing for nullable value
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=nullValue,indent=0]
+----
+
+.Customize odds for nullable value
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=customizedOddsForNullValue,indent=0]
+----
+
+=== Misc
+
+.Sets the length for large text
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=largeText,indent=0]
+----
+
+== References
+
+- {jdk-doc}/java.sql/java/sql/JDBCType.html[JDBCType]
+- link:/docs/settings/[Settings] - Complete guideline for {foxglove-javadoc-link}/setting/DataSetting.html[DataSetting].
+- {instancio-core-doc}/org/instancio/InstancioGenApi.html[InstancioGenApi] - For generating random values.

@@ -1,0 +1,60 @@
++++
+title = 'Spring Framework'
+description = 'Examples for SpringFramework integration'
+weight = 9
++++
+
+.Importing
+[source,java]
+----
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.jdbc.JdbcTestUtils;
+
+import guru.mikelue.foxglove.TableFacet;
+import guru.mikelue.foxglove.annotation.GenData;
+import guru.mikelue.foxglove.annotation.TableFacetsSource;
+import guru.mikelue.foxglove.functional.TableFacetProvider;
+import guru.mikelue.foxglove.jdbc.JdbcTableFacet;
+import guru.mikelue.foxglove.springframework.EnableFoxglove;
+----
+
+---
+
+Following example using following context configuration of SpringFramework.
+
+.Context Configuration
+[source,java]
+----
+include::{example-dir}/SpringFrameworkTest.java[tag=contextConfiguration,indent=0]
+----
+
+link:{foxglove-javadoc-link}/annotation/DataGenSource.html[@DataGenSource] and link:{foxglove-javadoc-link}/annotation/TableFacetsSource.html[@TableFacetsSource] is still working if there are no such bean found in Spring's context.
+
+NOTE: {junit5-javadoc-link}/Nested.html[@Nested] tests of JUnit 5 are not supported with SpringFramework integration.
+
+== Beans
+
+.Use bean definition as sources of TableFacets
+[source,java]
+----
+include::{example-dir}/SpringFrameworkTest.java[tag=useBeanOfSpringFramework,indent=0]
+----
+
+.Use provider
+[source,java]
+----
+include::{example-dir}/SpringFrameworkTest.java[tag=providerClass,indent=0]
+
+include::{example-dir}/SpringFrameworkTest.java[tag=byProvider,indent=0]
+----
+
+== Transaction
+
+.Not joining transactions
+[source,java]
+----
+include::{example-dir}/SpringFrameworkTest.java[tag=noRollback,indent=0]
+----
+

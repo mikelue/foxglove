@@ -1,0 +1,7 @@
+:jdbcTableFacet-link: {foxglove-javadoc-link}/jdbc/JdbcTableFacet.html[JdbcTableFacet]
+
+[WARNING]
+====
+* Since {jdbcTableFacet-link} is not reusable, you should not use `@TableFacetSource` field when you are using https://docs.junit.org/current/user-guide/#writing-tests-test-instance-lifecycle[@TestInstance(Lifecycle.PER_CLASS)].
+* Use `TableFacetProvider` for `@TableFacetSource` fields while you are using `@TestInstance(Lifecycle.PER_CLASS)`
+====
