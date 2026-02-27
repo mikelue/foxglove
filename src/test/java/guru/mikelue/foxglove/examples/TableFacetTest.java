@@ -597,3 +597,4 @@ public class TableFacetTest extends AbstractJdbcTestBase {
 		return new JdbcDataGenerator(getDataSource());
 	}
 }
+

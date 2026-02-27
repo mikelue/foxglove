@@ -1,7 +1,7 @@
 :foxglove-url: https://foxglove.mikelue.guru
 :instancio-link: https://www.instancio.org/user-guide/[Instancio]
 
-https://foxglove.mikelue.guru/[image:https://img.shields.io/badge/Foxglove-darkorange?logo=googlehome&labelColor=lightgreen[Official Foxglove Site]]
+https://foxglove.mikelue.guru/[image:https://img.shields.io/maven-central/v/guru.mikelue.foxglove/core[Official Foxglove Site]]
 https://github.com/mikelue/foxglove[image:https://img.shields.io/badge/Git-Foxglove-darkorange?logo=github&labelColor=lightslategray[Git Repository GitHub]]
 https://foxglove.mikelue.guru/maven-site/project-info.html[image:https://img.shields.io/badge/Foxglove-darkorange?logo=apachemaven&label=Maven%20Site&labelColor=lightslategray[Project information Maven site]]
 https://foxglove.mikelue.guru/maven-site/apidocs/[image:https://img.shields.io/badge/Foxglove-darkorange?logo=htmx&label=Javadoc&labelColor=lightslategray[Javadocs]]

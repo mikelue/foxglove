@@ -34,6 +34,7 @@ import guru.mikelue.foxglove.functional.TableFacetProvider;
 import guru.mikelue.foxglove.functional.TableFacetsProvider;
 import guru.mikelue.foxglove.jdbc.JdbcTableFacet;
 import guru.mikelue.foxglove.setting.DataSettingInfo;
+
 import mockit.Mocked;
 import mockit.Verifications;
 
