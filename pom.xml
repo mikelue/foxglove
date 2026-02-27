@@ -663,15 +663,22 @@
 	</scm>
 
 	<distributionManagement>
-		<repository>
-			<id>github</id>
-			<name>GitHub Packages</name>
-			<url>https://maven.pkg.github.com/mikelue/foxglove</url>
-		</repository>
 		<site>
 			<id>github</id>
 			<url>scm:git:https://github.com/mikelue/foxglove.git</url>
 		</site>
+
+		<repository>
+			<id>central</id>
+			<name>Sonatype Central Portal</name>
+			<url>https://central.sonatype.com/</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/mikelue/foxglove</url>
+		</snapshotRepository>
 	</distributionManagement>
 
 	<licenses>
