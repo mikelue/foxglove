@@ -62,7 +62,7 @@ jobs:
           java-version: '21'
           cache: 'maven'
 
-      - uses: dorny/paths-filter@v3
+      - uses: dorny/paths-filter@v4
         id: src-file-change
         with:
           filters: |
@@ -80,7 +80,7 @@ jobs:
         run: mvn -B -Dstyle.color=always clover:clover
 
       - name: Upload Clover report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: clover-report
           path: site/public/clover/

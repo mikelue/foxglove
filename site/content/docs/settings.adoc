@@ -92,6 +92,10 @@ You could use `DataSetting.execludeWhen(Predicate<ColumnMeta>)` to exclude some 
 include::{example-dir}/SettingTest.java[tag=excludeWhen,indent=0]
 ----
 
+== Misc
+
+* {foxglove-javadoc-link}/functional/ColumnMatchers.html[ColumnsMatchers] has built-in matchers for matching columns by name, type, etc.
+
 == References
 
 * {jdk-doc}/java.sql/java/sql/JDBCType.html[java.sql.JDBCType]
