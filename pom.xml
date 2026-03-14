@@ -671,7 +671,7 @@
 
 	<scm>
 		<connection>scm:git:git://github.com/mikelue/foxglove</connection>
-		<developerConnection>scm:git:ssh://github.com:mikelue/foxglove</developerConnection>
+		<developerConnection>scm:git:ssh://git@github.com/mikelue/foxglove</developerConnection>
 		<url>https://github.com/mikelue/foxglove</url>
 		<tag>HEAD</tag>
 	</scm>
