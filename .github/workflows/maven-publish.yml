@@ -127,7 +127,7 @@ jobs:
         run: mvn site -DskipTests=true
 
       - name: Download Clover report
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v8
         with:
           name: clover-report
           path: site/public/clover
