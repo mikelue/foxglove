@@ -108,4 +108,4 @@ include::{example-dir}/JUnit5SimpleTest.java[tag=useTableFacetOfEnclosingClass,i
 
 ---
 
-References: https://docs.junit.org/current/user-guide/#writing-tests-nested-tests[Nested Tests]
+References: https://docs.junit.org/5.10.5/user-guide/#writing-tests-nested[Nested Tests]

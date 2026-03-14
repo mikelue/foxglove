@@ -80,7 +80,7 @@ ORDER BY cr_created_at DESC
 
 ## Integration
 
-* See {foxglove-url}/quickstart/junit[JUnit 5 Quick Start] for usage with https://docs.junit.org/current/user-guide/[JUnit 5].
+* See {foxglove-url}/quickstart/junit[JUnit 5 Quick Start] for usage with https://docs.junit.org/5.10.5/user-guide/https://docs.junit.org/5.10.5/user-guide/[JUnit 5].
 * See {foxglove-url}/quickstart/springframework[SpringFramework Quick Start] for usage with https://docs.spring.io/spring-framework/reference/6.0/testing/support-jdbc.html[SprinFramwork - JDBC Testing Support].
 
 ## Documentations
@@ -96,7 +96,7 @@ See {foxglove-url}/quickstart[Quick start] for details.
 
 Thanks to {instancio-link} project for its excellent data generation capabilities.
 
-https://docs.junit.org/current/user-guide/[image:https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmikelue%2Ffoxglove%2Frefs%2Fheads%2Fmain%2Fpom.xml&query=%2F*%5Blocal-name()%3D%27project%27%5D%2F*%5Blocal-name()%3D%27properties%27%5D%2F*%5Blocal-name()%3D%27version.junit%27%5D&logo=junit5&label=JUnit["Dynamic XML Badge"]]
+https://docs.junit.org/5.10.5/user-guide/[image:https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmikelue%2Ffoxglove%2Frefs%2Fheads%2Fmain%2Fpom.xml&query=%2F*%5Blocal-name()%3D%27project%27%5D%2F*%5Blocal-name()%3D%27properties%27%5D%2F*%5Blocal-name()%3D%27version.junit%27%5D&logo=junit5&label=JUnit["Dynamic XML Badge"]]
 https://docs.spring.io/spring-framework/reference/6.0/index.html[image:https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmikelue%2Ffoxglove%2Frefs%2Fheads%2Fmain%2Fpom.xml&query=%2F*%5Blocal-name()%3D%27project%27%5D%2F*%5Blocal-name()%3D%27properties%27%5D%2F*%5Blocal-name()%3D%27version.spring%27%5D&logo=spring&label=SpringFramework[SpringFramework]]
 link:https://docs.spring.io/spring-boot/docs/3.1.x/reference/html/[image:https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmikelue%2Ffoxglove%2Frefs%2Fheads%2Fmain%2Fpom.xml&query=%2F*%5Blocal-name()%3D%27project%27%5D%2F*%5Blocal-name()%3D%27properties%27%5D%2F*%5Blocal-name()%3D%27version.spring-boot%27%5D&logo=springboot&label=SpringFramework[SpringBoot]]
 link:https://www.instancio.org/user-guide/[image:https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fraw.githubusercontent.com%2Fmikelue%2Ffoxglove%2Frefs%2Fheads%2Fmain%2Fpom.xml&query=%2F*%5Blocal-name()%3D%27project%27%5D%2F*%5Blocal-name()%3D%27properties%27%5D%2F*%5Blocal-name()%3D%27version.spring-boot%27%5D&logo=springboot&label=SpringFramework[Instancio]]

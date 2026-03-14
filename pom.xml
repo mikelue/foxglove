@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>guru.mikelue.foxglove</groupId>
 	<artifactId>core</artifactId>
-	<version>1.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<url>https://foxglove.mikelue.guru/</url>
 
@@ -32,7 +30,7 @@
 		<version.awaitility>4.3.0</version.awaitility>
 
 		<!--
-			- Versions of database drivers(or embeded databases) for testing
+			- Versions of database drivers(or embedded databases) for testing
 		-->
 		<version.h2>2.4.240</version.h2>
 		<version.hsqldb>2.7.4</version.hsqldb>
@@ -65,6 +63,7 @@
 		<version.plugin.hugo>0.2.20</version.plugin.hugo>
 		<version.plugin.clover>4.5.2</version.plugin.clover>
 		<version.plugin.scm-publish>3.3.0</version.plugin.scm-publish>
+		<version.plugin.release>3.3.1</version.plugin.release>
 
 		<version.highlightjs>11.9.0</version.highlightjs>
 
@@ -383,6 +382,21 @@
 					<content>${hugo.output}</content>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>${version.plugin.release}</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<useReleaseProfile>false</useReleaseProfile>
+					<releaseProfiles>release</releaseProfiles>
+					<goals>deploy</goals>
+					<arguments>-DskipTests -DskipITs</arguments>
+					<pushChanges>true</pushChanges>
+					<localCheckout>true</localCheckout>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -607,39 +621,39 @@
 						<additionalOption>--allow-script-in-comments</additionalOption>
 					</additionalOptions>
 					<header><![CDATA[
-					<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${version.highlightjs}/styles/base16/atelier-sulphurpool-light.min.css">
+						<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${version.highlightjs}/styles/base16/atelier-sulphurpool-light.min.css">
 						<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${version.highlightjs}/highlight.min.js"></script>
 						<script>hljs.highlightAll();</script>
 						<script type="text/javascript">
-								window.addEventListener('load', function() {
+							window.addEventListener('load', function() {
 								var links = document.links;
 								for (var i = 0; i < links.length; i++) {
-								if (links[i].hostname != window.location.hostname) {
-								links[i].target = '_blank';
+									if (links[i].hostname != window.location.hostname) {
+										links[i].target = '_blank';
+									}
 								}
-								}
-								});
+							});
 						</script>
-							]]></header>
-						<links>
-							<link>https://docs.oracle.com/en/java/javase/${maven.compiler.release}/docs/api/</link>
-							<link>https://docs.spring.io/spring-framework/docs/6.0.x/javadoc-api/</link>
-							<link>https://javadoc.io/doc/org.instancio/instancio-core/${version.instancio}/</link>
-							<link>https://docs.junit.org/current/api/</link>
-						</links>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-project-info-reports-plugin</artifactId>
-					<version>${version.plugin.report}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-report-plugin</artifactId>
-					<version>${version.plugin.report.surefire}</version>
-				</plugin>
-			</plugins>
+					]]></header>
+					<links>
+						<link>https://docs.oracle.com/en/java/javase/${maven.compiler.release}/docs/api/</link>
+						<link>https://docs.spring.io/spring-framework/docs/6.0.x/javadoc-api/</link>
+						<link>https://javadoc.io/doc/org.instancio/instancio-core/${version.instancio}/</link>
+						<link>https://docs.junit.org/${version.junit}/api/</link>
+					</links>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${version.plugin.report}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>${version.plugin.report.surefire}</version>
+			</plugin>
+		</plugins>
 	</reporting>
 
 	<repositories>

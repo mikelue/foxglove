@@ -60,8 +60,8 @@ theme = 'relearn'
 	foxglove-link = "link:/[Foxglove]"
 	foxglove-javadoc-link = "link:/maven-site/apidocs/guru/mikelue/foxglove"
 	instancio-link = "https://www.instancio.org/user-guide/[Instancio]"
-	junit5-link = "https://docs.junit.org/current/user-guide/[JUnit 5]"
-	junit5-javadoc-link = "https://junit.org/junit5/docs/current/api/org.junit.jupiter.api/org/junit/jupiter/api"
+	junit5-link = "https://docs.junit.org/5.10.5/user-guide/[JUnit 5]"
+	junit5-javadoc-link = "https://docs.junit.org/5.10.5/api/org.junit.jupiter.api/org/junit/jupiter/api"
 
 	springframework-link = "https://docs.spring.io/spring-framework/reference/6.0/overview.html[SpringFramework]"
 	springframework-javadoc-link = "https://docs.spring.io/spring-framework/docs/6.0.x/javadoc-api/org/springframework"
