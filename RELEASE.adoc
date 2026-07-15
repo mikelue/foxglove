@@ -1,6 +1,11 @@
 ## How to release a version
 
+. Use release plugin(Maven) to increment version and tagging git
++
 ```sh
 mvn release:clean release:prepare
 mvn release:perform
 ```
+** `release:perform` will push tags to Github
+. Github CI will:
+** (triggered by tag) Build this project and deploy to maven-central
