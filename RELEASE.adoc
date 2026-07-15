@@ -1,0 +1,6 @@
+## How to release a version
+
+```sh
+mvn release:clean release:prepare
+mvn release:perform
+```

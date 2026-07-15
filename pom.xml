@@ -394,7 +394,6 @@
 				<version>${version.plugin.release}</version>
 				<configuration>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
-					<useReleaseProfile>false</useReleaseProfile>
 					<releaseProfiles>release</releaseProfiles>
 					<goals>deploy</goals>
 					<arguments>-DskipTests -DskipITs</arguments>
