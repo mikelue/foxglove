@@ -97,9 +97,9 @@ final class MetaUtils {
 		var metaOfColumns = new ArrayList<ColumnMeta>(columnCount);
 
 		for (int index = 1; index <= columnCount; ++index) {
-			var columName = rsMeta.getColumnName(index);
+			var columnName = rsMeta.getColumnName(index);
 			var jdbcType = resolveJdbcType(rsMeta.getColumnType(index));
-			var typeName = rsMeta.getColumnTypeName(index);
+			var typeName = rsMeta.getColumnTypeName(index).toLowerCase();
 			var size = rsMeta.getPrecision(index);
 			var decimalDigits = rsMeta.getScale(index);
 
@@ -112,7 +112,7 @@ final class MetaUtils {
 			}
 
 			var newColumnMeta = new ColumnMeta(
-				columName, properties,
+				columnName, properties,
 				typeName, jdbcType,
 				size, decimalDigits
 			);
@@ -139,7 +139,7 @@ final class MetaUtils {
 		var metaOfColumns = new ArrayList<ColumnMeta>(rsOfColumnMeta.getFetchSize());
 
 		while (rsOfColumnMeta.next()) {
-			var columName = rsOfColumnMeta.getString("COLUMN_NAME");
+			var columnName = rsOfColumnMeta.getString("COLUMN_NAME");
 			var jdbcType = resolveJdbcType(rsOfColumnMeta.getInt("DATA_TYPE"));
 			var typeName = rsOfColumnMeta.getString("TYPE_NAME");
 			var size = rsOfColumnMeta.getInt("COLUMN_SIZE");
@@ -169,7 +169,7 @@ final class MetaUtils {
 			// :~)
 
 			var newColumnMeta = new ColumnMeta(
-				columName, properties,
+				columnName, properties,
 				typeName, jdbcType,
 				size, decimalDigits
 			);

@@ -6,6 +6,11 @@ CREATE TABLE ap_types (
     tp_color         VARCHAR(32),
     tp_json_data     JSON,
 	tp_computed_size INT AS (tp_size - 1),
+    tp_date          DATE,
+    tp_time          TIME(6),
+    tp_datetime      DATETIME(6),
+    tp_timestamp     TIMESTAMP(6) NULL,
+    tp_year          YEAR,
     tp_time_created  DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     tp_time_updated  DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
                      ON UPDATE CURRENT_TIMESTAMP(6)

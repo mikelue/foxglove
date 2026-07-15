@@ -1,15 +1,17 @@
 package guru.mikelue.foxglove.jdbc;
 
+import org.apache.commons.lang3.Validate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-import org.apache.commons.lang3.Validate;
-
-import guru.mikelue.foxglove.functional.*;
-import guru.mikelue.foxglove.jdbc.ColumnSettingSteps.ColumnFromStep;
+import guru.mikelue.foxglove.functional.Int4SequenceSupplier;
+import guru.mikelue.foxglove.functional.Int8SequenceSupplier;
+import guru.mikelue.foxglove.functional.RowIndexToValue;
+import guru.mikelue.foxglove.functional.SequenceSupplier;
 import guru.mikelue.foxglove.jdbc.JdbcTableFacet.Builder;
 import guru.mikelue.foxglove.setting.ColumnConfig;
 

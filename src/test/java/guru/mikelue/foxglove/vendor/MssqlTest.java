@@ -1,15 +1,15 @@
 package guru.mikelue.foxglove.vendor;
 
-import java.io.IOException;
-
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import java.io.IOException;
+import java.time.*;
 
 import guru.mikelue.foxglove.TableFacet;
 import guru.mikelue.foxglove.annotation.GenData;
@@ -37,6 +37,15 @@ public class MssqlTest extends AbstractVendorTestBase {
 	TableFacet defaultData = JdbcTableFacet.builder("ap_types")
 		.numberOfRows(RANDOM_ROWS)
 		.column("tp_color").fixed("green")
+		.column("tp_date").fixed(LocalDate.now())
+		.column("tp_time").fixed(LocalTime.now())
+		.column("tp_datetime").fixed(LocalDateTime.now())
+		// .column("tp_datetime").fixed(Instant.now())
+		.column("tp_datetime2").fixed(LocalDateTime.now())
+		// .column("tp_datetime2").fixed(Instant.now())
+		.column("tp_datetimeoffset").fixed(OffsetDateTime.now())
+		.column("tp_smalldatetime").fixed(LocalDateTime.now())
+		// .column("tp_smalldatetime").fixed(Instant.now())
 		.build();
 
 	/**

@@ -5,6 +5,12 @@ CREATE TABLE ap_types (
 	tp_key RAW(256),
 	tp_color VARCHAR2(32),
 	tp_computed_size NUMBER(10) GENERATED ALWAYS AS (tp_size - 1),
+    tp_date                DATE NULL,
+    tp_timestamp           TIMESTAMP(6) NULL,
+    tp_timestamp_tz        TIMESTAMP(6) WITH TIME ZONE NULL,
+    tp_timestamp_ltz       TIMESTAMP(6) WITH LOCAL TIME ZONE NULL,
+    tp_interval_year_month INTERVAL YEAR(9) TO MONTH NULL,
+    tp_interval_day_second INTERVAL DAY(9) TO SECOND(6) NULL,
 	tp_time_created TIMESTAMP NOT NULL,
 	tp_time_updated TIMESTAMP NOT NULL
 );

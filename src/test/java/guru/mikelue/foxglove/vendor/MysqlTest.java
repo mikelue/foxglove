@@ -1,15 +1,15 @@
 package guru.mikelue.foxglove.vendor;
 
-import java.io.IOException;
-
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import java.io.IOException;
+import java.time.*;
 
 import guru.mikelue.foxglove.TableFacet;
 import guru.mikelue.foxglove.annotation.GenData;
@@ -38,6 +38,15 @@ public class MysqlTest extends AbstractVendorTestBase {
 		.numberOfRows(RANDOM_ROWS)
 		.column("tp_color").fixed("green")
 		.column("tp_json_data").fixed("[2, 4, 6, 8, 10]")
+		.column("tp_year").fixed((short)2000)
+		.column("tp_date").fixed(LocalDate.now())
+		.column("tp_time").fixed(LocalTime.now())
+		.column("tp_datetime").fixed(LocalDateTime.now())
+		// .column("tp_datetime").fixed(Instant.now())
+		// .column("tp_datetime").fixed(OffsetDateTime.now())
+		.column("tp_timestamp").fixed(LocalDateTime.now())
+		// .column("tp_timestamp").fixed(Instant.now())
+		// .column("tp_timestamp").fixed(OffsetDateTime.now())
 		.build();
 
 	/**

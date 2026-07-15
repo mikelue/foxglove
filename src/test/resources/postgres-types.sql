@@ -8,6 +8,12 @@ CREATE TABLE ap_types (
 	tp_range		 INT4RANGE,
 	tp_json_data     JSONB,
 	tp_computed_size INT GENERATED ALWAYS AS (tp_size - 1) STORED,
-    tp_time_created  TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    tp_time_updated  TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+	tp_date          DATE,
+    tp_time          TIME,
+    tp_timetz        TIME WITH TIME ZONE,
+    tp_timestamp     TIMESTAMP,
+    tp_timestamptz   TIMESTAMP WITH TIME ZONE,
+    tp_interval      INTERVAL,
+    tp_time_created  TIMESTAMP(0) WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    tp_time_updated  TIMESTAMP(0) WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP(0)
 );
