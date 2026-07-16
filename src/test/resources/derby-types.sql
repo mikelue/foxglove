@@ -6,6 +6,9 @@ CREATE TABLE ap_types (
     tp_key           VARCHAR(64) FOR BIT DATA,
     tp_color         VARCHAR(32),
 	tp_computed_size INT GENERATED ALWAYS AS (tp_size - 1),
+    tp_date          DATE,
+    tp_time          TIME,
+    tp_timestamp     TIMESTAMP,
     tp_time_created  TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     tp_time_updated  TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 )

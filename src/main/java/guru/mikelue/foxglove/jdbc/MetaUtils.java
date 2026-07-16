@@ -141,7 +141,7 @@ final class MetaUtils {
 		while (rsOfColumnMeta.next()) {
 			var columnName = rsOfColumnMeta.getString("COLUMN_NAME");
 			var jdbcType = resolveJdbcType(rsOfColumnMeta.getInt("DATA_TYPE"));
-			var typeName = rsOfColumnMeta.getString("TYPE_NAME");
+			var typeName = rsOfColumnMeta.getString("TYPE_NAME").toLowerCase();
 			var size = rsOfColumnMeta.getInt("COLUMN_SIZE");
 			var decimalDigits = rsOfColumnMeta.getInt("DECIMAL_DIGITS");
 

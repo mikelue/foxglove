@@ -476,6 +476,14 @@
 		</profile>
 
 		<profile>
+			<id>test-h2</id>
+
+			<properties>
+				<excludedGroups>!vendor-h2</excludedGroups>
+			</properties>
+		</profile>
+
+		<profile>
 			<id>test-hsqldb</id>
 
 			<properties>

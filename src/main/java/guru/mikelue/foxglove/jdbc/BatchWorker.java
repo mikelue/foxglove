@@ -3,12 +3,8 @@ package guru.mikelue.foxglove.jdbc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
-import java.sql.JDBCType;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.time.*;
-import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -64,62 +60,14 @@ interface BatchWorker {
 	static void setParams(
 		PreparedStatement stmt, Map<ColumnMeta, Object> paramSet
 	) throws SQLException {
-		var logger = org.slf4j.LoggerFactory.getLogger(BatchWorker.class);
+		var paramIndex = 1;
 
-		int paramIndex = 1;
 		for (ColumnMeta columnMeta: paramSet.keySet()) {
 			Object value = paramSet.get(columnMeta);
-			JDBCType jdbcType = columnMeta.jdbcType();
 
-			if (value == null) {
-				stmt.setNull(paramIndex, jdbcType.getVendorTypeNumber());
-				paramIndex++;
-				continue;
-			}
-
-			if (value instanceof Temporal) {
-				if (value instanceof Instant instant) {
-					stmt.setObject(paramIndex, instant.atOffset(ZoneOffset.UTC));
-				} else if (value instanceof ZonedDateTime zonedDateTime) {
-					stmt.setObject(paramIndex, zonedDateTime.toOffsetDateTime());
-				} else {
-					stmt.setObject(paramIndex, value);
-				}
-			} else if (value instanceof java.util.Date utilDate) {
-				if (value instanceof java.sql.Time sqlTime)  {
-					stmt.setTime(paramIndex, sqlTime);
-				} else if (value instanceof java.sql.Date sqlDate)  {
-					stmt.setDate(paramIndex, sqlDate);
-				} else if (value instanceof java.sql.Timestamp sqlTimestamp)  {
-					stmt.setTimestamp(paramIndex, sqlTimestamp);
-				} else {
-					stmt.setTimestamp(paramIndex, new java.sql.Timestamp(utilDate.getTime()));
-				}
-			} else if (value instanceof java.lang.Number) {
-				if (value instanceof Byte) {
-					stmt.setByte(paramIndex, (Byte) value);
-				} else if (value instanceof Short) {
-					stmt.setShort(paramIndex, (Short) value);
-				} else if (value instanceof Integer) {
-					stmt.setInt(paramIndex, (Integer) value);
-				} else if (value instanceof Long) {
-					stmt.setLong(paramIndex, (Long) value);
-				} else if (value instanceof Float) {
-					stmt.setFloat(paramIndex, (Float) value);
-				} else if (value instanceof Double) {
-					stmt.setDouble(paramIndex, (Double) value);
-				} else if (value instanceof BigDecimal) {
-					stmt.setBigDecimal(paramIndex, (BigDecimal) value);
-				}
-			} else {
-				/*
-				For oracle INTERVALDS and INTERVALYM
-				this would cause error:
-				Caused by: java.sql.SQLException: ORA-17004: Invalid column type
-				https://docs.oracle.com/error-help/db/ora-17004/
-			  	*/
-				stmt.setObject(paramIndex, value, jdbcType.getVendorTypeNumber());
-			}
+			ParameterSetterFacade.smartSetParameter(
+				stmt, paramIndex, columnMeta, value
+			);
 
 			paramIndex++;
 		}

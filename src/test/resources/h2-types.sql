@@ -4,14 +4,17 @@ CREATE TABLE ap_types (
     tp_size      INTEGER       DEFAULT 0 NOT NULL,
     tp_key       VARBINARY(64) NULL,
     tp_color     VARCHAR(32)   NULL,
-	tp_int_array INTEGER ARRAY[8] NULL,
-	tp_boolean BOOLEAN NULL,
+    tp_int_array INTEGER ARRAY[8] NULL,
+    tp_boolean BOOLEAN NULL,
     tp_date DATE NULL,
     tp_time TIME NULL,
     tp_time_with_time_zone TIME WITH TIME ZONE NULL,
     tp_timestamp TIMESTAMP NULL,
     tp_timestamp_with_time_zone TIMESTAMP WITH TIME ZONE NULL,
-	tp_size_computed INTEGER GENERATED ALWAYS AS (tp_size - 1),
+    tp_uuid UUID NULL,
+    tp_json JSON NULL,
+    tp_size_computed INTEGER GENERATED ALWAYS AS (tp_size - 1),
     tp_time_created   TIMESTAMP     DEFAULT CURRENT_TIMESTAMP NOT NULL,
     tp_time_updated   TIMESTAMP     DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
+

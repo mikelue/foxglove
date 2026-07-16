@@ -6,6 +6,10 @@ CREATE TABLE ap_types (
     tp_color TEXT,
     tp_boolean INTEGER, -- SQLite uses 0/1 for boolean
 	tp_computed_size INTEGER GENERATED ALWAYS AS (tp_size - 1),
+    tp_date DATE,
+    tp_time TIME,
+    tp_datetime DATETIME,
+    tp_timestamp TIMESTAMP,
     tp_time_created DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
     tp_time_updated DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
 );

@@ -9,8 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
+import java.time.*;
 
 import guru.mikelue.foxglove.TableFacet;
 import guru.mikelue.foxglove.annotation.GenData;
@@ -35,21 +34,62 @@ public class OracleTest extends AbstractVendorTestBase {
 	}
 
 	@TableFacetsSource
-	TableFacet defaultData = JdbcTableFacet.builder("ap_types")
-		.numberOfRows(RANDOM_ROWS)
-		.column("tp_color").fixed("green")
-		.column("tp_date").fixed(LocalDateTime.now())
-		// .column("tp_date").fixed(Instant.now())
-		.column("tp_timestamp").fixed(LocalDateTime.now())
-		// .column("tp_timestamp").fixed(Instant.now())
-		.column("tp_timestamp_tz").fixed(ZonedDateTime.now())
-		// .column("tp_timestamp_tz").fixed(OffsetDateTime.now())
-		.column("tp_timestamp_ltz").fixed(ZonedDateTime.now())
-		// .column("tp_timestamp_ltz").fixed(OffsetDateTime.now())
-		// Unsupported for now
-		// .column("tp_interval_year_month").fixed(new INTERVALYM("+2-3"))
-		// .column("tp_interval_day_second").fixed(new INTERVALDS("+10 10:00:00"))
-		.build();
+	TableFacet[] defaultData = new JdbcTableFacet[] {
+		// Uses java.time.Instant as value for temporal types of database
+		JdbcTableFacet.builder("ap_types")
+			.numberOfRows(RANDOM_ROWS)
+			.column("tp_color").fixed("green")
+			.column("tp_date").fixed(Instant.now())
+			.column("tp_timestamp").fixed(Instant.now())
+			.column("tp_timestamp_tz").fixed(Instant.now())
+			.column("tp_timestamp_ltz").fixed(Instant.now())
+			.build(),
+		// Uses java.time.OffsetXXX as value for temporal types of database
+		JdbcTableFacet.builder("ap_types")
+			.numberOfRows(RANDOM_ROWS)
+			.column("tp_color").fixed("green")
+			.column("tp_date").fixed(OffsetDateTime.now())
+			.column("tp_timestamp").fixed(OffsetDateTime.now())
+			.column("tp_timestamp_tz").fixed(OffsetDateTime.now())
+			.column("tp_timestamp_ltz").fixed(OffsetDateTime.now())
+			.build(),
+		// Uses java.time.ZonedDateTime as value for temporal types of database
+		JdbcTableFacet.builder("ap_types")
+			.numberOfRows(RANDOM_ROWS)
+			.column("tp_color").fixed("green")
+			.column("tp_date").fixed(ZonedDateTime.now())
+			.column("tp_timestamp").fixed(ZonedDateTime.now())
+			.column("tp_timestamp_tz").fixed(ZonedDateTime.now())
+			.column("tp_timestamp_ltz").fixed(ZonedDateTime.now())
+			.build(),
+		// Uses time types in java.sql as value for temporal types of database
+		JdbcTableFacet.builder("ap_types")
+			.numberOfRows(RANDOM_ROWS)
+			.column("tp_color").fixed("green")
+			.column("tp_date").fixed(java.sql.Date.from(Instant.now()))
+			.column("tp_timestamp").fixed(java.sql.Timestamp.from(Instant.now()))
+			.column("tp_timestamp_tz").fixed(java.sql.Timestamp.from(Instant.now()))
+			.column("tp_timestamp_ltz").fixed(java.sql.Timestamp.from(Instant.now()))
+			.build(),
+		// Uses java.time.LocalTime as value for temporal types of database
+		JdbcTableFacet.builder("ap_types")
+			.numberOfRows(RANDOM_ROWS)
+			.column("tp_color").fixed("green")
+			.column("tp_date").fixed(LocalDate.now())
+			.column("tp_timestamp").fixed(LocalDateTime.now())
+			.column("tp_timestamp_tz").fixed(LocalDateTime.now())
+			.column("tp_timestamp_ltz").fixed(LocalDateTime.now())
+			.build(),
+		// Uses strings as values for temporal types of database
+		JdbcTableFacet.builder("ap_types")
+			.numberOfRows(RANDOM_ROWS)
+			.column("tp_color").fixed("green")
+			.column("tp_date").fixed("2026-07-16 10:20:12")
+			.column("tp_timestamp").fixed("2026-07-16 12:34:56")
+			.column("tp_timestamp_tz").fixed("2026-07-16 12:34:56 +00:00")
+			.column("tp_timestamp_ltz").fixed("2026-07-16 12:34:56 +00:00")
+			.build(),
+	};
 
 	/**
 	 * Tests basic functionality of Oracle database.
@@ -61,6 +101,6 @@ public class OracleTest extends AbstractVendorTestBase {
 		assertNumberOfRows(
 			"ap_types", "tp_color = 'green'"
 		)
-			.isEqualTo(RANDOM_ROWS);
+			.isEqualTo(RANDOM_ROWS * defaultData.length);
 	}
 }

@@ -140,7 +140,7 @@ public class MetaUtilsTest extends AbstractTestBase {
 
 		assertThat(testedMeta.get(0))
 			.hasFieldOrPropertyWithValue("name", SAMPLE_COLUMN_NAME)
-			.hasFieldOrPropertyWithValue("typeName", sampleTypeName)
+			.hasFieldOrPropertyWithValue("typeName", sampleTypeName.toLowerCase())
 			.hasFieldOrPropertyWithValue("jdbcType", JDBCType.VARCHAR)
 			.hasFieldOrPropertyWithValue("size", sampleColumnSize)
 			.hasFieldOrPropertyWithValue("decimalDigits", sampleDecimalDigits);
@@ -280,6 +280,9 @@ public class MetaUtilsTest extends AbstractTestBase {
 
 			mockRs.getString("COLUMN_NAME");
 			result = SAMPLE_COLUMN_NAME;
+
+			mockRs.getString("TYPE_NAME");
+			result = "varchar";
 		}};
 	}
 
