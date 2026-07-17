@@ -92,6 +92,17 @@ You could use `DataSetting.execludeWhen(Predicate<ColumnMeta>)` to exclude some 
 include::{example-dir}/SettingTest.java[tag=excludeWhen,indent=0]
 ----
 
+== JDBC
+
+While JDBC drivers could have different behavior for various types of Java, like `java.time.Instant` for example,
+{foxglove-javadoc-link}/setting/DataSetting.html#addStatementSetter(guru.mikelue.foxglove.functional.ColumnMatcher,guru.mikelue.foxglove.jdbc.CustomStatementSetter)[DataSetting.addStatementSetter] open a way to customize
+setting parameters of {jdk-doc}/java.sql/java/sql/PreparedStatement.html[java.sql.PreparedStatement].
+
+[source,java]
+----
+include::{example-dir}/SettingTest.java[tag=addStatementSetter,indent=0]
+----
+
 == Misc
 
 * {foxglove-javadoc-link}/functional/ColumnMatchers.html[ColumnsMatchers] has built-in matchers for matching columns by name, type, etc.

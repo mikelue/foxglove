@@ -12,6 +12,7 @@ import java.util.function.Supplier;
 
 import guru.mikelue.foxglove.ColumnMeta;
 import guru.mikelue.foxglove.TupleAccessor;
+import guru.mikelue.foxglove.setting.DataSettingInfo;
 
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
@@ -25,7 +26,8 @@ class JdbcTxWorker implements AutoCloseable {
 	record InsertionContext (
 		String sql, int numberOfRows,
 		String[] namesOfGeneratedColumns,
-		Supplier<Map<ColumnMeta, Object>> rowParamsGenerator
+		Supplier<Map<ColumnMeta, Object>> rowParamsGenerator,
+		DataSettingInfo settingInfo
 	) {}
 
 	private Logger logger = LoggerFactory.getLogger(JdbcTxWorker.class);
@@ -86,7 +88,8 @@ class JdbcTxWorker implements AutoCloseable {
 			var batchWorker = BatchWorker.newInstance(
 				conn.getMetaData().getDriverName(),
 				stmt, namesOfGeneratedColumns, generatedValuesConsumer,
-				txGear.batchSize()
+				txGear.batchSize(),
+				context.settingInfo()
 			);
 			var rowParamsGenerator = context.rowParamsGenerator();
 

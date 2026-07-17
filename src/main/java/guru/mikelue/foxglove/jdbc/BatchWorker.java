@@ -4,14 +4,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import guru.mikelue.foxglove.ColumnMeta;
 import guru.mikelue.foxglove.TupleAccessor;
+import guru.mikelue.foxglove.setting.DataSettingInfo;
 
 /**
  * Since {@link PreparedStatement#getGeneratedKeys()} behaves differently
@@ -41,34 +46,85 @@ interface BatchWorker {
 		String dbDriverName,
 		PreparedStatement stmt, String[] askedGeneratedColumns,
 		Consumer<List<TupleAccessor>> generatedValuesConsumer,
-		int batchSize
+		int batchSize,
+		DataSettingInfo dataSettingInfo
 	) {
+		var WorkerAssistance = new WorkerAssistance(
+			stmt, new GeneratedValueLoader(askedGeneratedColumns),
+			generatedValuesConsumer, dataSettingInfo
+		);
+
 		if (DRIVER_FOR_SINGLE_WORKER.matcher(dbDriverName).matches()) {
-			return new SingleBatchWorker(
-				stmt, askedGeneratedColumns, generatedValuesConsumer
-			);
+			return new SingleBatchWorker(stmt, WorkerAssistance);
 		}
 
-		return new PluralBatchWorker(
-			stmt, askedGeneratedColumns, generatedValuesConsumer, batchSize
-		);
+		return new PluralBatchWorker(stmt, batchSize, WorkerAssistance);
 	}
 
 	void addBatch(Map<ColumnMeta, Object> paramSet) throws SQLException;
 	void executeBatch() throws SQLException;
+}
 
-	static void setParams(
-		PreparedStatement stmt, Map<ColumnMeta, Object> paramSet
+class WorkerAssistance {
+	private final PreparedStatement stmt;
+	private final Consumer<List<TupleAccessor>> generatedValuesConsumer;
+	private final GeneratedValueLoader generatedValueLoader;
+	private final Map<SetParameterIndex, CustomStatementSetter<?>> paramSetterCache = new HashMap<>(32);
+	private final CustomStatementSetterProvider paramSetterProvider;
+
+	WorkerAssistance(
+		PreparedStatement stmt,
+		GeneratedValueLoader generatedValueLoader,
+		Consumer<List<TupleAccessor>> generatedValuesConsumer,
+		DataSettingInfo dataSettingInfo
+	) {
+		this.stmt = stmt;
+		this.generatedValuesConsumer = generatedValuesConsumer;
+		this.generatedValueLoader = generatedValueLoader;
+		this.paramSetterProvider = dataSettingInfo::getStatementSetter;
+	}
+
+	final protected void setParams(Map<ColumnMeta, Object> paramSet) throws SQLException
+	{
+		setParams(stmt, paramSet, paramSetterCache);
+	}
+
+	final protected void consumeValues(ResultSet rs) throws SQLException
+	{
+		generatedValuesConsumer.accept(
+			generatedValueLoader.toTuples(rs)
+		);
+	}
+
+	@SuppressWarnings("unchecked")
+	private void setParams(
+		PreparedStatement stmt, Map<ColumnMeta, Object> paramSet,
+		Map<SetParameterIndex, CustomStatementSetter<?>> setterCache
 	) throws SQLException {
 		var paramIndex = 1;
 
 		for (ColumnMeta columnMeta: paramSet.keySet()) {
-			Object value = paramSet.get(columnMeta);
+			var jdbcType = columnMeta.jdbcType();
+			var value = paramSet.get(columnMeta);
 
-			ParameterSetterFacade.smartSetParameter(
-				stmt, paramIndex, columnMeta, value
-			);
+			CustomStatementSetter<Object> setParamFunc;
 
+			if (value == null) {
+				setParamFunc = (localStmt, localIndex, meta, localValue) ->
+					stmt.setNull(localIndex, jdbcType.getVendorTypeNumber());
+			} else {
+				setParamFunc = (CustomStatementSetter<Object>)setterCache.computeIfAbsent(
+					new SetParameterIndex(columnMeta, value.getClass()),
+					index -> paramSetterProvider.apply(columnMeta)
+						.orElseGet(
+							() -> {
+								return ParameterSetterFactory.smartSetterImpl(index);
+							}
+						)
+				);
+			}
+
+			setParamFunc.setParameter(stmt, paramIndex, columnMeta, value);
 			paramIndex++;
 		}
 	}
@@ -77,27 +133,24 @@ interface BatchWorker {
 class PluralBatchWorker implements BatchWorker {
 	private Logger logger = LoggerFactory.getLogger(PluralBatchWorker.class);
 
+	private final WorkerAssistance assistance;
 	private final PreparedStatement stmt;
-	private final Consumer<List<TupleAccessor>> generatedValuesConsumer;
-	private final GeneratedValueLoader generatedValueLoader;
 	private final int batchSize;
 	private int unExecutedNumberOfRows = 0;
 
 	PluralBatchWorker(
-		PreparedStatement stmt, String[] askedGeneratedColumns,
-		Consumer<List<TupleAccessor>> generatedValuesConsumer,
-		int batchSize
+		PreparedStatement stmt, int batchSize,
+		WorkerAssistance assistance
 	) {
 		this.stmt = stmt;
-		this.generatedValueLoader = new GeneratedValueLoader(askedGeneratedColumns);
-		this.generatedValuesConsumer = generatedValuesConsumer;
 		this.batchSize = batchSize;
+		this.assistance = assistance;
 	}
 
 	@Override
 	public void addBatch(Map<ColumnMeta, Object> paramSet) throws SQLException
 	{
-		BatchWorker.setParams(stmt, paramSet);
+		assistance.setParams(paramSet);
 
 		stmt.addBatch();
 		unExecutedNumberOfRows++;
@@ -120,9 +173,7 @@ class PluralBatchWorker implements BatchWorker {
 		unExecutedNumberOfRows = 0;
 
 		try (var rs = stmt.getGeneratedKeys()) {
-			generatedValuesConsumer.accept(
-				generatedValueLoader.toTuples(rs)
-			);
+			assistance.consumeValues(rs);
 		}
 	}
 }
@@ -130,32 +181,27 @@ class PluralBatchWorker implements BatchWorker {
 class SingleBatchWorker implements BatchWorker {
 	private Logger logger = LoggerFactory.getLogger(SingleBatchWorker.class);
 
+	private final WorkerAssistance assistance;
 	private final PreparedStatement stmt;
-	private final Consumer<List<TupleAccessor>> generatedValuesConsumer;
-	private final GeneratedValueLoader generatedValueLoader;
 	private int counter = 0;
 
 	SingleBatchWorker(
-		PreparedStatement stmt, String[] askedGeneratedColumns,
-		Consumer<List<TupleAccessor>> generatedValuesConsumer
+		PreparedStatement stmt, WorkerAssistance assistance
 	) {
 		this.stmt = stmt;
-		this.generatedValueLoader = new GeneratedValueLoader(askedGeneratedColumns);
-		this.generatedValuesConsumer = generatedValuesConsumer;
+		this.assistance = assistance;
 	}
 
 	@Override
 	public void addBatch(Map<ColumnMeta, Object> paramSet) throws SQLException
 	{
-		BatchWorker.setParams(stmt, paramSet);
+		assistance.setParams(paramSet);
 
 		stmt.executeUpdate();
 		counter++;
 
 		try (var rs = stmt.getGeneratedKeys()) {
-			generatedValuesConsumer.accept(
-				generatedValueLoader.toTuples(rs)
-			);
+			assistance.consumeValues(rs);
 		}
 	}
 
@@ -166,3 +212,6 @@ class SingleBatchWorker implements BatchWorker {
 		counter = 0;
 	}
 }
+
+@FunctionalInterface
+interface CustomStatementSetterProvider extends Function<ColumnMeta, Optional<CustomStatementSetter<?>>> {}

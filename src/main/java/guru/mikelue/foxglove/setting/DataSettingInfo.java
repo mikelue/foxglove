@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 
 import guru.mikelue.foxglove.ColumnMeta;
 import guru.mikelue.foxglove.functional.ColumnMatcher;
+import guru.mikelue.foxglove.jdbc.CustomStatementSetter;
 
 /**
  * This interface defines the methods used by engine of data generating.
@@ -76,4 +77,13 @@ public interface DataSettingInfo {
 	 * @return Whether or not to generate value automatically
 	 */
 	boolean isAutoGenerating(ColumnMeta column);
+
+	/**
+	 * Gets the {@link CustomStatementSetter} for the given column metadata.
+	 *
+	 * @param meta The metadata of a column
+	 *
+	 * @return The {@link CustomStatementSetter} for the given column metadata or empty
+	 */
+	Optional<CustomStatementSetter<?>> getStatementSetter(ColumnMeta meta);
 }

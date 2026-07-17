@@ -18,6 +18,7 @@ import guru.mikelue.foxglove.functional.ColumnMatcher;
 import guru.mikelue.foxglove.functional.SupplierDecider;
 import guru.mikelue.foxglove.functional.Suppliers;
 import guru.mikelue.foxglove.jdbc.JdbcTableFacet;
+import guru.mikelue.foxglove.jdbc.CustomStatementSetter;
 import guru.mikelue.foxglove.jdbc.JdbcDataGenerator;
 
 import static java.sql.JDBCType.*;
@@ -119,6 +120,7 @@ public class DataSetting implements DataSettingInfo {
 	private final Map<JDBCType, SupplierDecider<?>> jdbcTypeConfigMap = new HashMap<>(32);
 	private final Map<String, SupplierDecider<?>> typeNameConfigMap = new HashMap<>(4);
 	private final Map<ColumnMatcher, SupplierDecider<?>> matcherConfigMap = new HashMap<>(4);
+	private final Map<ColumnMatcher, CustomStatementSetter<?>> customStatSetters = new HashMap<>(4);
 
 	private int minLengthOfLargeText = DefaultSetting.LARGE_TEXT_MIN_LENGTH;
 	private int maxLengthOfLargeText = DefaultSetting.LARGE_TEXT_MAX_LENGTH;
@@ -231,6 +233,20 @@ public class DataSetting implements DataSettingInfo {
 		);
 
 		return newColumnConfig;
+	}
+
+	/**
+	 * Adds a {@link CustomStatementSetter} for columns matched by given {@link ColumnMatcher}.
+	 *
+	 * @param matcher The matcher to match columns
+	 * @param setter The custom statement setter for matched columns
+	 *
+	 * @return The data setting itself
+	 */
+	public DataSetting addStatementSetter(ColumnMatcher matcher, CustomStatementSetter<?> setter)
+	{
+		customStatSetters.put(matcher, setter);
+		return this;
 	}
 
 	/**
@@ -508,6 +524,18 @@ public class DataSetting implements DataSettingInfo {
 		}
 
 		return !notSupportedJdbcTypes.contains(column.jdbcType());
+	}
+
+	@Override
+	public Optional<CustomStatementSetter<?>> getStatementSetter(ColumnMeta meta)
+	{
+		for (var matcher: customStatSetters.keySet()) {
+			if (matcher.test(meta)) {
+				return Optional.of(customStatSetters.get(matcher));
+			}
+		}
+
+		return Optional.empty();
 	}
 
 	DataSetting notSupportedJdbcTypes(Set<JDBCType> jdbcTypes)

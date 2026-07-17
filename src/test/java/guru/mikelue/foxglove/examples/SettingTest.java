@@ -125,6 +125,38 @@ public class SettingTest extends AbstractJdbcTestBase {
 			.isEqualTo(10);
 	}
 
+	/**
+	 * Example for setting on for customizing parameter setters for {@link PreparedStatement}.
+	 */
+	@Test
+	void addStatementSetter()
+	{
+		// tag::addStatementSetter[]
+		var dataSetting = new DataSetting()
+			.addStatementSetter(
+				meta -> meta.name().equalsIgnoreCase("cr_brand"),
+				(stmt, index, meta, value) -> {
+					stmt.setString(index, "CC-" + value);
+				}
+			);
+		// end::addStatementSetter[]
+
+		var dataGenerator = new JdbcDataGenerator(getDataSource());
+		dataGenerator
+			.withSetting(dataSetting);
+
+		var sampleTable = JdbcTableFacet.builder(TABLE_CAR)
+			.numberOfRows(10)
+			.column("cr_brand")
+				.useSupplier(gen().string().length(16)::get)
+			.build();
+
+		dataGenerator.generate(sampleTable);
+
+		assertNumberOfRows(TABLE_CAR, "cr_brand LIKE 'CC-%'")
+			.isEqualTo(10);
+	}
+
 	@Nested
 	class SettingFeatureTest {
 		/**

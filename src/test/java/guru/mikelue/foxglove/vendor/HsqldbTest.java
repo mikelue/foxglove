@@ -32,12 +32,6 @@ public class HsqldbTest extends AbstractVendorTestBase {
 		build("classpath:hsqldb-types.sql", appContext);
 	}
 
-	@BeforeEach
-	void setup() {}
-
-	@AfterEach
-	void tearDown() {}
-
 	@TableFacetsSource
 	TableFacet[] defaultData = new JdbcTableFacet[] {
 		// Uses java.time.Instant as value for temporal types of database

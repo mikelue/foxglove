@@ -276,7 +276,8 @@ class DataGeneratorWorker {
 					valueTomb.preserveProtoData(newTuple);
 
 					return newTuple.asMap();
-				}
+				},
+				setting
 			),
 			valueTomb::preserveAfterData
 		);

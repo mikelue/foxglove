@@ -48,6 +48,25 @@ public class DerbyTest extends AbstractVendorTestBase {
 		.givenType(JDBCType.TIMESTAMP)
 			.useSupplier(() -> gen().temporal().timestamp().get());
 
+	private DataSetting derbyTypingForLocalDateTime = new DataSetting()
+		.givenType(JDBCType.TIMESTAMP)
+			.useSupplier(() -> gen().temporal().timestamp().get())
+		.addStatementSetter(
+			meta -> meta.name().equalsIgnoreCase("tp_date"),
+			(stmt, index, meta, value) ->
+				stmt.setDate(index, java.sql.Date.valueOf((LocalDate)value))
+		)
+		.addStatementSetter(
+			meta -> meta.name().equalsIgnoreCase("tp_time"),
+			(stmt, index, meta, value) ->
+				stmt.setTime(index, java.sql.Time.valueOf((LocalTime)value))
+		)
+		.addStatementSetter(
+			meta -> meta.name().equalsIgnoreCase("tp_timestamp"),
+			(stmt, index, meta, value) ->
+				stmt.setTimestamp(index, java.sql.Timestamp.valueOf((LocalDateTime)value))
+		);
+
 	@TableFacetsSource
 	TableFacet[] defaultData = new JdbcTableFacet[] {
 		// Uses java.time.Instant as values for Derby temporal types
@@ -88,7 +107,7 @@ public class DerbyTest extends AbstractVendorTestBase {
 			.build(),
 		// Uses java.time.LocalXXX values for Derby temporal types
 		JdbcTableFacet.builder("ap_types")
-			.withSetting(derbyTyping)
+			.withSetting(derbyTypingForLocalDateTime)
 			.numberOfRows(RANDOM_ROWS)
 			.column("tp_color").fixed("green")
 			.column("tp_date").fixed(LocalDate.now())

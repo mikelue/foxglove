@@ -39,7 +39,7 @@ public class DataSettingTest extends AbstractTestBase {
 		ColumnMeta sampleColumn,
 		boolean expectedGenerating
 	) {
-		var testedSetting = DataSetting.defaults()
+		var testedSetting = new DataSetting()
 			.givenType("status")
 				.useSupplier(() -> "ACTIVE")
 			.columnMatcher(columnMeta ->

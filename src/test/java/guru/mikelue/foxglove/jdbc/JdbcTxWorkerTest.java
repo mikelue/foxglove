@@ -1,17 +1,17 @@
 package guru.mikelue.foxglove.jdbc;
 
-import java.sql.*;
-import java.util.LinkedHashMap;
-import java.util.List;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import guru.mikelue.foxglove.ColumnMeta;
-import guru.mikelue.misc.testlib.AbstractTestBase;
+import java.sql.*;
+import java.util.LinkedHashMap;
+import java.util.List;
 
+import guru.mikelue.foxglove.ColumnMeta;
+import guru.mikelue.foxglove.setting.DataSetting;
+import guru.mikelue.misc.testlib.AbstractTestBase;
 import mockit.Expectations;
 import mockit.Mocked;
 import mockit.Verifications;
@@ -189,7 +189,8 @@ public class JdbcTxWorkerTest extends AbstractTestBase {
 				numberOfGeneratedRows += testedWorker.performInsert(
 					new JdbcTxWorker.InsertionContext(
 						insertSql, numberOfRows, new String[0],
-						mockRowGenerator::generateRowParams
+						mockRowGenerator::generateRowParams,
+						new DataSetting()
 					),
 					v -> {}
 				);

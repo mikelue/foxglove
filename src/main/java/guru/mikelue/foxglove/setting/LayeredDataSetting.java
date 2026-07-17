@@ -6,6 +6,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 import guru.mikelue.foxglove.ColumnMeta;
+import guru.mikelue.foxglove.jdbc.CustomStatementSetter;
 
 /**
  * A proxy of {@link DataSettingInfo} for multi-layer settings.
@@ -76,5 +77,18 @@ public class LayeredDataSetting implements DataSettingInfo {
 	public boolean isAutoGenerating(ColumnMeta column)
 	{
 		return viableSettings.get(0).isAutoGenerating(column);
+	}
+
+	@Override
+	public Optional<CustomStatementSetter<?>> getStatementSetter(ColumnMeta meta)
+	{
+		for (var setting : viableSettings) {
+			var paramSetter = setting.getStatementSetter(meta);
+			if (paramSetter.isPresent()) {
+				return paramSetter;
+			}
+		}
+
+		return Optional.empty();
 	}
 }
