@@ -166,7 +166,7 @@ public class TableFacetTest extends AbstractJdbcTestBase {
 	@Test
 	void setting()
 	{
-		final String sampleText = gen().text().word().get();
+		final String sampleText = gen().string().length(8).get();
 		var suffixSupplier = gen().text().pattern("#C#C#d#d");
 
 		// tag::settingOnTable[]
