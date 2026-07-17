@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    
+    
+    <link rel="SHORTCUT ICON" href="img/clover.ico" />
+
+    <link rel="stylesheet" href="aui/css/aui.min.css" media="all"/>
+    <link rel="stylesheet" href="aui/css/aui-experimental.min.css" media="all"/>
+    <!--[if IE 9]><link rel="stylesheet" href="aui/css/aui-ie9.min.css" media="all"/><![endif]-->
+
+    <style type="text/css" media="all">
+        @import url('style.css');
+        @import url('tree.css');
+        
+    </style>
+
+    <script src="jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-experimental.min.js" type="text/javascript"></script>
+    <script src="aui/js/aui-soy.min.js" type="text/javascript"></script>
+
+    <script src="package-nodes-tree.js" type="text/javascript"></script>
+    <script src="clover-tree.js" type="text/javascript"></script>
+    <script src="clover.js" type="text/javascript"></script>
+    <script src="clover-descriptions.js" type="text/javascript"></script>
+    <script src="cloud.js" type="text/javascript"></script>
+
+            <title>core 1.0.5-SNAPSHOT</title>
+    </head>
+
+<body onresize="processTreeMapDashJson(treeMapJson);" >
+    <div id="page">
+        
+        
+
+
+<header id="header" role="banner">
+    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation">
+        <div class="aui-header-inner">
+            <div class="aui-header-primary">
+                <h1 id="logo" class="aui-header-logo aui-header-logo-clover">
+                    <a href="https://openclover.org" title="Visit OpenClover home page"><span class="aui-header-logo-device">OpenClover</span></a>
+                </h1>
+                            </div>
+            <div class="aui-header-secondary">
+                <ul class="aui-nav">
+                    <li id="system-help-menu">
+                        <a class="aui-nav-link" title="Open online documentation" target="_blank"
+                           href="https://openclover.org/documentation">
+                            <span class="aui-icon aui-icon-small aui-iconfont-help">&#160;Help</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+        
+        <div class="aui-page-panel">
+            <div class="aui-page-panel-inner">
+                <div class="aui-page-panel-nav aui-page-panel-nav-clover">
+                    
+
+<div class="aui-page-header-inner" style="margin-bottom: 20px;">
+    <div class="aui-page-header-image">
+                    <a href="https://foxglove.mikelue.guru/" target="_top">
+                <div class="aui-avatar aui-avatar-large aui-avatar-project">
+            <div class="aui-avatar-inner">
+                                    <img src="img/clover_logo_large.png" alt="Clover icon"/>
+                            </div>
+        </div>
+                    </a>
+            </div>
+    <div class="aui-page-header-main" >
+        <h1>
+                            <a href="https://foxglove.mikelue.guru/" target="_top">
+                                        core 1.0.5-SNAPSHOT
+                                        </a>
+                    </h1>
+    </div>
+</div>
+
+<nav class="aui-navgroup aui-navgroup-vertical">
+    <div class="aui-navgroup-inner">
+                                            <ul class="aui-nav">
+                <li class="aui-nav-selected">
+                    <a href="dashboard.html">Project overview</a>
+                </li>
+            </ul>
+        
+                <div class="aui-nav-heading packages-nav-heading">
+            <strong>Packages</strong>
+        </div>
+        <div class="aui-nav project-packages">
+            <form method="get" action="#" class="aui package-filter-container">
+                <input type="text" autocomplete="off" class="package-filter text"
+                       placeholder="Type to filter packages..." name="package-filter" id="package-filter"
+                       title="Start typing package name (or part of the name) to search through the tree. Use arrow keys and the Enter key to navigate."/>
+            </form>
+            <p class="package-filter-no-results-message hidden">
+                <small>No results found.</small>
+            </p>
+                                                  <div class="packages-tree-wrapper" data-root-relative="" data-package-name="">
+                <div class="packages-tree-container"></div>
+                <div class="clover-packages-lozenges"></div>
+            </div>
+        </div>
+        
+            </div>
+</nav>                </div>
+                <section class="aui-page-panel-content">
+                    <div class="aui-page-panel-content-clover">
+
+                    
+                    <ol class="aui-nav aui-nav-breadcrumbs">
+            
+        <li><a href="dashboard.html">Project Clover database Fri Jul 17 2026 06:10:26 UTC</a></li>
+    </ol>
+    
+<h1 class="aui-h2-clover">
+            Project overview
+    </h1>
+<div class="aui-tabs horizontal-tabs">
+        <ul class="tabs-menu">
+            <li class="menu-item active-tab">
+            <a href="dashboard.html">Dashboard</a>
+        </li>
+                <li class="menu-item ">
+            <a href="pkg-summary.html"><strong>Application code</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="testsrc-pkg-summary.html"><strong>Test code</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="test-pkg-summary.html"><strong>Test results</strong></a>
+        </li>
+                <li class="menu-item ">
+            <a href="top-risks.html"><strong>Top risks</strong></a>
+        </li>
+        <li class="menu-item ">
+            <a href="quick-wins.html"><strong>Quick wins</strong></a>
+        </li>
+                                                <li class="menu-item ">
+                <a href="treemap.html"><strong>Coverage tree map</strong></a>
+            </li>
+            </ul>
+    <div class="tabs-pane active-pane" id="tabs-first">
+
+        <div>&#160;</div>
+
+
+
+
+
+
+<div class="aui-group">
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                
+                <h3>
+                    Code coverage
+                    <small style="float:right; font-weight: normal">
+                        96 classes,
+                        1,624 /
+                        1,822 elements
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.8913282</span>89.1%</div><div style="display: table-cell">
+ <div title="89.1% Covered"  style="min-width:200px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:89.1%"></div></div></div></div>
+                <p><a href="pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>
+                    Test results
+                    <small style="float:right; font-weight: normal">
+                        304 /
+                        304 tests
+                        2.92 secs
+                    </small>
+                </h3>
+            </header>
+            <div class="dashboard-widget-content">
+                                    
+
+<div style="display: table; width: 100%">
+            <div class="barGraphValue"><span class="sortValue">1.0</span>100%</div>         <div style="display: table-cell">
+            
+            <div title="0% Errors" style="min-width: 40px;" class="testBarError">
+                <div title="100% of tests passed&lt;br/&gt;0% of tests failed" class="testBarFail" style="width: 100%"><div class="testBarPass" style="width: 100%"></div></div>
+            </div>
+        </div>
+    </div>                                <p><a href="test-pkg-summary.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Code metrics</h3>
+            </header>
+                         
+
+<div id="$statsId" class="aui-item" style="display: ${display}">
+<div style="display: table">
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of branches in this project">Branches:</label></div>
+        <div class="stats-box-value">284</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of statements in this project">Statements:</label></div>
+        <div class="stats-box-value">1,229</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of methods in this project">Methods:</label></div>
+        <div class="stats-box-value">309</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of classes in this project">Classes:</label></div>
+        <div class="stats-box-value">96</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of files in this project">Files:</label></div>
+            <div class="stats-box-value">68</div>
+        </div>
+                <div class="stats-box">
+            <div class="stats-box-label"><label title="Total number of packages in this project">Packages:</label></div>
+            <div class="stats-box-value">8</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of lines of code in this project">LOC:</label></div>
+        <div class="stats-box-value">7,673</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Total number of non-comment lines of code in this project">NCLOC:</label></div>
+        <div class="stats-box-value">4,318</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Cyclomatic complexity is the number of paths in this project">Total complexity:</label></div>
+        <div class="stats-box-value">500</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label">
+            <label title="Complexity density is the complexity divided by the number of statements in this project">Complexity density:</label>
+        </div>
+        <div class="stats-box-value">0.41</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of statements per method.">Statements/Method:</label></div>
+        <div class="stats-box-value">3.98</div>
+    </div>
+    <div class="stats-box">
+        <div class="stats-box-label"><label title="Number of methods per class.">Methods/Class:</label></div>
+        <div class="stats-box-value">3.22</div>
+    </div>
+            <div class="stats-box">
+            <div class="stats-box-label"><label title="Number of classes per package.">Classes/Package:</label></div>
+            <div class="stats-box-value">12</div>
+        </div>
+        <div class="stats-box">
+        <div class="stats-box-label"><label title="Complexity divided by the number of methods in this project">Average method complexity:</label></div>
+        <div class="stats-box-value">1.62</div>
+    </div>
+</div>
+
+</div>        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Coverage Distribution</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">                     <img src="img/classDistrubutionChart.png" alt="img/classDistrubutionChart.png" usemap="#classDistrubutionChart.png"/>
+                </div>
+                <map id="classDistrubutionChart.png" name="classDistrubutionChart.png">
+<area shape="rect" coords="288,15,310,206" title="40 classes have 91-100% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="263,168,285,206" title="8 classes have 81-90% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="238,187,260,206" title="4 classes have 71-80% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="213,192,235,206" title="3 classes have 61-70% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="188,197,210,206" title="2 classes have 51-60% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="163,197,185,206" title="2 classes have 41-50% coverage" alt="" nohref="nohref"/>
+<area shape="rect" coords="38,163,60,206" title="9 classes have 0% coverage" alt="" nohref="nohref"/>
+</map>
+            </div>
+        </div>
+        
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Class Complexity</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <div style="text-align: center">
+                    <img src="img/classComplexityChart.png" alt="img/classComplexityChart.png" usemap="#classComplexityChart.png"/>
+                </div>
+                <map id="classComplexityChart.png" name="classComplexityChart.png">
+<area shape="poly" coords="289,74,287,76,284,74,287,71,289,74,289,74" title="Complexity: 24; Coverage: 94%; Class: SpringContextObjectFactory" alt="" href="guru/mikelue/foxglove/springframework/SpringContextObjectFactory.html#SpringContextObjectFactory"/>
+<area shape="poly" coords="304,198,302,200,299,198,302,195,304,198,304,198" title="Complexity: 2; Coverage: 100%; Class: SpringContextGenDataProcessor" alt="" href="guru/mikelue/foxglove/springframework/FoxgloveTestListener.html#SpringContextGenDataProcessor"/>
+<area shape="poly" coords="252,164,249,166,247,164,249,161,252,164,252,164" title="Complexity: 8; Coverage: 79%; Class: FoxgloveTestListener" alt="" href="guru/mikelue/foxglove/springframework/FoxgloveTestListener.html#FoxgloveTestListener"/>
+<area shape="poly" coords="294,164,292,166,289,164,292,161,294,164,294,164" title="Complexity: 8; Coverage: 96%; Class: LayeredDataSetting" alt="" href="guru/mikelue/foxglove/setting/LayeredDataSetting.html#LayeredDataSetting"/>
+<area shape="poly" coords="282,175,279,178,277,175,279,173,282,175,282,175" title="Complexity: 6; Coverage: 91%; Class: GeneratingUtils" alt="" href="guru/mikelue/foxglove/setting/GeneratingUtils.html#GeneratingUtils"/>
+<area shape="poly" coords="304,203,302,206,299,203,302,201,304,203,304,203" title="Complexity: 1; Coverage: 100%; Class: DefaultSetting" alt="" href="guru/mikelue/foxglove/setting/DefaultSetting.html#DefaultSetting"/>
+<area shape="poly" coords="304,186,302,189,299,186,302,184,304,186,304,186" title="Complexity: 4; Coverage: 100%; Class: ColumnConfigImpl" alt="" href="guru/mikelue/foxglove/setting/DataSetting.html#ColumnConfigImpl"/>
+<area shape="poly" coords="299,18,297,20,294,18,297,15,299,18,299,18" title="Complexity: 34; Coverage: 98%; Class: DataSetting" alt="" href="guru/mikelue/foxglove/setting/DataSetting.html#DataSetting"/>
+<area shape="poly" coords="292,164,289,166,287,164,289,161,292,164,292,164" title="Complexity: 8; Coverage: 95%; Class: ReflectGenDataObjectFactory" alt="" href="guru/mikelue/foxglove/annotation/ReflectGenDataObjectFactory.html#ReflectGenDataObjectFactory"/>
+<area shape="poly" coords="304,141,302,144,299,141,302,139,304,141,304,141" title="Complexity: 12; Coverage: 100%; Class: LayeredDataGenContext" alt="" href="guru/mikelue/foxglove/annotation/LayeredDataGenContext.html#LayeredDataGenContext"/>
+<area shape="poly" coords="304,181,302,183,299,181,302,178,304,181,304,181" title="Complexity: 5; Coverage: 100%; Class: GenDataProcessor" alt="" href="guru/mikelue/foxglove/annotation/GenDataProcessor.html#GenDataProcessor"/>
+<area shape="poly" coords="304,181,302,183,299,181,302,178,304,181,304,181" title="Complexity: 5; Coverage: 100%; Class: GenDataProcessor" alt="" href="guru/mikelue/foxglove/annotation/GenDataProcessor.html#GenDataProcessor"/>
+<area shape="poly" coords="304,203,302,206,299,203,302,201,304,203,304,203" title="Complexity: 1; Coverage: 100%; Class: DefaultSetting" alt="" href="guru/mikelue/foxglove/setting/DefaultSetting.html#DefaultSetting"/>
+<area shape="poly" coords="54,198,52,200,49,198,52,195,54,198,54,198" title="Complexity: 2; Coverage: 0%; Class: GenData.FallbackDataGeneratorProvider" alt="" href="guru/mikelue/foxglove/annotation/GenData.html#GenData.FallbackDataGeneratorProvider"/>
+<area shape="poly" coords="304,181,302,183,299,181,302,178,304,181,304,181" title="Complexity: 5; Coverage: 100%; Class: GenDataProcessor" alt="" href="guru/mikelue/foxglove/annotation/GenDataProcessor.html#GenDataProcessor"/>
+<area shape="poly" coords="304,181,302,183,299,181,302,178,304,181,304,181" title="Complexity: 5; Coverage: 100%; Class: GenDataProcessor" alt="" href="guru/mikelue/foxglove/annotation/GenDataProcessor.html#GenDataProcessor"/>
+<area shape="poly" coords="304,175,302,178,299,175,302,173,304,175,304,175" title="Complexity: 6; Coverage: 100%; Class: AbstractMemberAccessor" alt="" href="guru/mikelue/foxglove/annotation/DataGenContextImpl.html#AbstractMemberAccessor"/>
+<area shape="poly" coords="304,141,302,144,299,141,302,139,304,141,304,141" title="Complexity: 12; Coverage: 100%; Class: LayeredDataGenContext" alt="" href="guru/mikelue/foxglove/annotation/LayeredDataGenContext.html#LayeredDataGenContext"/>
+<area shape="poly" coords="304,186,302,189,299,186,302,184,304,186,304,186" title="Complexity: 4; Coverage: 100%; Class: ColumnConfigImpl" alt="" href="guru/mikelue/foxglove/setting/DataSetting.html#ColumnConfigImpl"/>
+<area shape="poly" coords="284,141,282,144,279,141,282,139,284,141,284,141" title="Complexity: 12; Coverage: 92%; Class: SupplierFactory" alt="" href="guru/mikelue/foxglove/annotation/DataGenContextImpl.html#SupplierFactory"/>
+<area shape="poly" coords="299,102,297,105,294,102,297,100,299,102,299,102" title="Complexity: 19; Coverage: 98%; Class: DataGenContextImpl" alt="" href="guru/mikelue/foxglove/annotation/DataGenContextImpl.html#DataGenContextImpl"/>
+<area shape="poly" coords="304,203,302,206,299,203,302,201,304,203,304,203" title="Complexity: 1; Coverage: 100%; Class: DefaultSetting" alt="" href="guru/mikelue/foxglove/setting/DefaultSetting.html#DefaultSetting"/>
+<area shape="poly" coords="269,158,267,161,264,158,267,156,269,158,269,158" title="Complexity: 9; Coverage: 86%; Class: ValueTomb" alt="" href="guru/mikelue/foxglove/jdbc/ValueTomb.html#ValueTomb"/>
+<area shape="poly" coords="304,198,302,200,299,198,302,195,304,198,304,198" title="Complexity: 2; Coverage: 100%; Class: SpringContextGenDataProcessor" alt="" href="guru/mikelue/foxglove/springframework/FoxgloveTestListener.html#SpringContextGenDataProcessor"/>
+<area shape="poly" coords="227,158,224,161,222,158,224,156,227,158,227,158" title="Complexity: 9; Coverage: 69%; Class: TupleAccessorImpl" alt="" href="guru/mikelue/foxglove/jdbc/TupleAccessorImpl.html#TupleAccessorImpl"/>
+<area shape="poly" coords="54,198,52,200,49,198,52,195,54,198,54,198" title="Complexity: 2; Coverage: 0%; Class: GenData.FallbackDataGeneratorProvider" alt="" href="guru/mikelue/foxglove/annotation/GenData.html#GenData.FallbackDataGeneratorProvider"/>
+<area shape="poly" coords="274,192,272,195,269,192,272,190,274,192,274,192" title="Complexity: 3; Coverage: 88%; Class: RowParamsGenerator" alt="" href="guru/mikelue/foxglove/jdbc/RowParamsGenerator.html#RowParamsGenerator"/>
+<area shape="poly" coords="304,192,302,195,299,192,302,190,304,192,304,192" title="Complexity: 3; Coverage: 100%; Class: ReferenceSettingStepImpl.CardinalityStepImpl" alt="" href="guru/mikelue/foxglove/jdbc/ReferenceSettingStepImpl.html#ReferenceSettingStepImpl.CardinalityStepImpl"/>
+<area shape="poly" coords="304,198,302,200,299,198,302,195,304,198,304,198" title="Complexity: 2; Coverage: 100%; Class: SpringContextGenDataProcessor" alt="" href="guru/mikelue/foxglove/springframework/FoxgloveTestListener.html#SpringContextGenDataProcessor"/>
+<area shape="poly" coords="242,130,239,133,237,130,239,128,242,130,242,130" title="Complexity: 14; Coverage: 75%; Class: ParameterSetterFactory" alt="" href="guru/mikelue/foxglove/jdbc/ParameterSetterFactory.html#ParameterSetterFactory"/>
+<area shape="poly" coords="304,198,302,200,299,198,302,195,304,198,304,198" title="Complexity: 2; Coverage: 100%; Class: SpringContextGenDataProcessor" alt="" href="guru/mikelue/foxglove/springframework/FoxgloveTestListener.html#SpringContextGenDataProcessor"/>
+<area shape="poly" coords="277,46,274,48,272,46,274,43,277,46,277,46" title="Complexity: 29; Coverage: 89%; Class: MetaUtils" alt="" href="guru/mikelue/foxglove/jdbc/MetaUtils.html#MetaUtils"/>
+<area shape="poly" coords="279,175,277,178,274,175,277,173,279,175,279,175" title="Complexity: 6; Coverage: 90%; Class: MetaDataCache" alt="" href="guru/mikelue/foxglove/jdbc/MetaDataCache.html#MetaDataCache"/>
+<area shape="poly" coords="257,136,254,138,252,136,254,133,257,136,257,136" title="Complexity: 13; Coverage: 81%; Class: KeySupplierOfInt" alt="" href="guru/mikelue/foxglove/jdbc/KeySupplierOfInt.html#KeySupplierOfInt"/>
+<area shape="poly" coords="279,181,277,183,274,181,277,178,279,181,279,181" title="Complexity: 5; Coverage: 90%; Class: KeySettingStepImpl" alt="" href="guru/mikelue/foxglove/jdbc/KeySettingStepImpl.html#KeySettingStepImpl"/>
+<area shape="poly" coords="299,130,297,133,294,130,297,128,299,130,299,130" title="Complexity: 14; Coverage: 98%; Class: JdbcTxWorker" alt="" href="guru/mikelue/foxglove/jdbc/JdbcTxWorker.html#JdbcTxWorker"/>
+<area shape="poly" coords="304,113,302,116,299,113,302,111,304,113,304,113" title="Complexity: 17; Coverage: 100%; Class: JdbcTableFacet.Builder" alt="" href="guru/mikelue/foxglove/jdbc/JdbcTableFacet.html#JdbcTableFacet.Builder"/>
+<area shape="poly" coords="304,113,302,116,299,113,302,111,304,113,304,113" title="Complexity: 17; Coverage: 100%; Class: JdbcTableFacet.Builder" alt="" href="guru/mikelue/foxglove/jdbc/JdbcTableFacet.html#JdbcTableFacet.Builder"/>
+<area shape="poly" coords="287,158,284,161,282,158,284,156,287,158,287,158" title="Complexity: 9; Coverage: 93%; Class: DataGeneratorWorker" alt="" href="guru/mikelue/foxglove/jdbc/JdbcDataGenerator.html#DataGeneratorWorker"/>
+<area shape="poly" coords="214,119,212,121,209,119,212,116,214,119,214,119" title="Complexity: 16; Coverage: 64%; Class: JdbcDataGenerator" alt="" href="guru/mikelue/foxglove/jdbc/JdbcDataGenerator.html#JdbcDataGenerator"/>
+<area shape="poly" coords="297,158,294,161,292,158,294,156,297,158,297,158" title="Complexity: 9; Coverage: 97%; Class: GeneratedValueLoader" alt="" href="guru/mikelue/foxglove/jdbc/GeneratedValueLoader.html#GeneratedValueLoader"/>
+<area shape="poly" coords="229,198,227,200,224,198,227,195,229,198,229,198" title="Complexity: 2; Coverage: 70%; Class: ColumnSettingSteps.CartesianProductSettingStep" alt="" href="guru/mikelue/foxglove/jdbc/ColumnSettingSteps.html#ColumnSettingSteps.CartesianProductSettingStep"/>
+<area shape="poly" coords="157,170,154,172,152,170,154,167,157,170,157,170" title="Complexity: 7; Coverage: 41%; Class: ColumnSettingSteps.KeyOfIntSettingStep" alt="" href="guru/mikelue/foxglove/jdbc/ColumnSettingSteps.html#ColumnSettingSteps.KeyOfIntSettingStep"/>
+<area shape="poly" coords="179,198,177,200,174,198,177,195,179,198,179,198" title="Complexity: 2; Coverage: 50%; Class: ColumnSettingSteps.ColumnSimpleStep" alt="" href="guru/mikelue/foxglove/jdbc/ColumnSettingSteps.html#ColumnSettingSteps.ColumnSimpleStep"/>
+<area shape="poly" coords="304,164,302,166,299,164,302,161,304,164,304,164" title="Complexity: 8; Coverage: 100%; Class: ColumnSettingStepImpl" alt="" href="guru/mikelue/foxglove/jdbc/ColumnSettingStepImpl.html#ColumnSettingStepImpl"/>
+<area shape="poly" coords="304,181,302,183,299,181,302,178,304,181,304,181" title="Complexity: 5; Coverage: 100%; Class: GenDataProcessor" alt="" href="guru/mikelue/foxglove/annotation/GenDataProcessor.html#GenDataProcessor"/>
+<area shape="poly" coords="304,192,302,195,299,192,302,190,304,192,304,192" title="Complexity: 3; Coverage: 100%; Class: ReferenceSettingStepImpl.CardinalityStepImpl" alt="" href="guru/mikelue/foxglove/jdbc/ReferenceSettingStepImpl.html#ReferenceSettingStepImpl.CardinalityStepImpl"/>
+<area shape="poly" coords="304,136,302,138,299,136,302,133,304,136,304,136" title="Complexity: 13; Coverage: 100%; Class: CartesianProductBuilder" alt="" href="guru/mikelue/foxglove/jdbc/CartesianProductBuilder.html#CartesianProductBuilder"/>
+<area shape="poly" coords="304,170,302,172,299,170,302,167,304,170,304,170" title="Complexity: 7; Coverage: 100%; Class: CardinalityInfo" alt="" href="guru/mikelue/foxglove/jdbc/CardinalityInfo.html#CardinalityInfo"/>
+<area shape="poly" coords="54,181,52,183,49,181,52,178,54,181,54,181" title="Complexity: 5; Coverage: 0%; Class: SingleBatchWorker" alt="" href="guru/mikelue/foxglove/jdbc/BatchWorker.html#SingleBatchWorker"/>
+<area shape="poly" coords="304,170,302,172,299,170,302,167,304,170,304,170" title="Complexity: 7; Coverage: 100%; Class: CardinalityInfo" alt="" href="guru/mikelue/foxglove/jdbc/CardinalityInfo.html#CardinalityInfo"/>
+<area shape="poly" coords="304,181,302,183,299,181,302,178,304,181,304,181" title="Complexity: 5; Coverage: 100%; Class: GenDataProcessor" alt="" href="guru/mikelue/foxglove/annotation/GenDataProcessor.html#GenDataProcessor"/>
+<area shape="poly" coords="232,198,229,200,227,198,229,195,232,198,232,198" title="Complexity: 2; Coverage: 71%; Class: BatchWorker" alt="" href="guru/mikelue/foxglove/jdbc/BatchWorker.html#BatchWorker"/>
+<area shape="poly" coords="304,203,302,206,299,203,302,201,304,203,304,203" title="Complexity: 1; Coverage: 100%; Class: DefaultSetting" alt="" href="guru/mikelue/foxglove/setting/DefaultSetting.html#DefaultSetting"/>
+<area shape="poly" coords="279,170,277,172,274,170,277,167,279,170,279,170" title="Complexity: 7; Coverage: 90%; Class: Suppliers" alt="" href="guru/mikelue/foxglove/functional/Suppliers.html#Suppliers"/>
+<area shape="poly" coords="54,203,52,206,49,203,52,201,54,203,54,203" title="Complexity: 1; Coverage: 0%; Class: StreamOfTableFacetsProvider" alt="" href="guru/mikelue/foxglove/functional/StreamOfTableFacetsProvider.html#StreamOfTableFacetsProvider"/>
+<area shape="poly" coords="54,198,52,200,49,198,52,195,54,198,54,198" title="Complexity: 2; Coverage: 0%; Class: GenData.FallbackDataGeneratorProvider" alt="" href="guru/mikelue/foxglove/annotation/GenData.html#GenData.FallbackDataGeneratorProvider"/>
+<area shape="poly" coords="54,203,52,206,49,203,52,201,54,203,54,203" title="Complexity: 1; Coverage: 0%; Class: StreamOfTableFacetsProvider" alt="" href="guru/mikelue/foxglove/functional/StreamOfTableFacetsProvider.html#StreamOfTableFacetsProvider"/>
+<area shape="poly" coords="54,203,52,206,49,203,52,201,54,203,54,203" title="Complexity: 1; Coverage: 0%; Class: StreamOfTableFacetsProvider" alt="" href="guru/mikelue/foxglove/functional/StreamOfTableFacetsProvider.html#StreamOfTableFacetsProvider"/>
+<area shape="poly" coords="254,186,252,189,249,186,252,184,254,186,254,186" title="Complexity: 4; Coverage: 80%; Class: RowIndexToValueSupplier" alt="" href="guru/mikelue/foxglove/functional/RowIndexToValueSupplier.html#RowIndexToValueSupplier"/>
+<area shape="poly" coords="264,181,262,183,259,181,262,178,264,181,264,181" title="Complexity: 5; Coverage: 84%; Class: RoundRobinValueSupplier" alt="" href="guru/mikelue/foxglove/functional/RoundRobinValueSupplier.html#RoundRobinValueSupplier"/>
+<area shape="poly" coords="54,175,52,178,49,175,52,173,54,175,54,175" title="Complexity: 6; Coverage: 0%; Class: Int8SequenceSupplier" alt="" href="guru/mikelue/foxglove/functional/Int8SequenceSupplier.html#Int8SequenceSupplier"/>
+<area shape="poly" coords="204,175,202,178,199,175,202,173,204,175,204,175" title="Complexity: 6; Coverage: 60%; Class: Int4SequenceSupplier" alt="" href="guru/mikelue/foxglove/functional/Int4SequenceSupplier.html#Int4SequenceSupplier"/>
+<area shape="poly" coords="54,186,52,189,49,186,52,184,54,186,54,186" title="Complexity: 4; Coverage: 0%; Class: ColumnMatchers" alt="" href="guru/mikelue/foxglove/functional/ColumnMatchers.html#ColumnMatchers"/>
+<area shape="poly" coords="304,136,302,138,299,136,302,133,304,136,304,136" title="Complexity: 13; Coverage: 100%; Class: CartesianProductBuilder" alt="" href="guru/mikelue/foxglove/jdbc/CartesianProductBuilder.html#CartesianProductBuilder"/>
+<area shape="poly" coords="304,203,302,206,299,203,302,201,304,203,304,203" title="Complexity: 1; Coverage: 100%; Class: DefaultSetting" alt="" href="guru/mikelue/foxglove/setting/DefaultSetting.html#DefaultSetting"/>
+<area shape="poly" coords="187,158,184,161,182,158,184,156,187,158,187,158" title="Complexity: 9; Coverage: 53%; Class: ColumnMeta" alt="" href="guru/mikelue/foxglove/ColumnMeta.html#ColumnMeta"/>
+<area shape="poly" coords="297,164,294,166,292,164,294,161,297,164,297,164" title="Complexity: 8; Coverage: 97%; Class: FoxgloveJUnitExtension" alt="" href="guru/mikelue/foxglove/junit/FoxgloveJUnitExtension.html#FoxgloveJUnitExtension"/>
+</map>
+            </div>
+        </div>
+        
+                    <div class="dashboard-widget">
+                <header class="dashboard-widget-header">
+                    <h3>Coverage tree map</h3>
+                </header>
+                <div class="dashboard-widget-content">
+                    <div id="infovis" style="width:100%; height:250px;">
+                        <div id="treemap-loader" style="position:relative;top:50px;">
+                            <p>
+                                Generating Coverage Tree Map. Please wait...
+                            </p>
+                            <p>
+                                <img src="img/ajax-loader.gif" alt="Loading Treemap"/>
+                            </p>
+                        </div>
+                    </div>
+                    <p><a href="treemap.html">See more</a></p>
+                </div>
+
+            </div>
+            </div>
+
+
+    <div class="aui-item">
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Top 20 project risks</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/JdbcTxWorker.html"
+                            style="font-size: 28px;color:#89c495"
+                            title="Average Method Complexity - 3.5 , Coverage - 98.1% ">JdbcTxWorker</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/GeneratedValueLoader.html"
+                            style="font-size: 25px;color:#89c495"
+                            title="Average Method Complexity - 3 , Coverage - 97.6% ">GeneratedValueLoader</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/annotation/DataGenContextImpl.html"
+                            style="font-size: 19px;color:#89c495"
+                            title="Average Method Complexity - 1.727 , Coverage - 98.3% ">DataGenContextImpl</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/springframework/SpringContextObjectFactory.html"
+                            style="font-size: 25px;color:#89c495"
+                            title="Average Method Complexity - 3 , Coverage - 94.7% ">SpringContextObjectFactory</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/setting/DataSetting.html"
+                            style="font-size: 19px;color:#89c495"
+                            title="Average Method Complexity - 1.619 , Coverage - 98.6% ">DataSetting</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/annotation/ReflectGenDataObjectFactory.html"
+                            style="font-size: 24px;color:#89c495"
+                            title="Average Method Complexity - 2.667 , Coverage - 95.6% ">ReflectGenDataObjectFactory</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/JdbcDataGenerator.html"
+                            style="font-size: 25px;color:#89c495"
+                            title="Average Method Complexity - 3 , Coverage - 93.6% ">DataGeneratorWorker</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/MetaUtils.html"
+                            style="font-size: 26px;color:#14892c"
+                            title="Average Method Complexity - 3.222 , Coverage - 89.2% ">MetaUtils</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/junit/FoxgloveJUnitExtension.html"
+                            style="font-size: 19px;color:#89c495"
+                            title="Average Method Complexity - 1.6 , Coverage - 97.5% ">FoxgloveJUnitExtension</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/setting/LayeredDataSetting.html"
+                            style="font-size: 19px;color:#89c495"
+                            title="Average Method Complexity - 1.6 , Coverage - 96.4% ">LayeredDataSetting</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/MetaDataCache.html"
+                            style="font-size: 21px;color:#14892c"
+                            title="Average Method Complexity - 2 , Coverage - 90% ">MetaDataCache</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/ParameterSetterFactory.html"
+                            style="font-size: 28px;color:#fae1a0"
+                            title="Average Method Complexity - 3.5 , Coverage - 75.6% ">ParameterSetterFactory</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/annotation/DataGenContextImpl.html"
+                            style="font-size: 18px;color:#14892c"
+                            title="Average Method Complexity - 1.5 , Coverage - 92.3% ">SupplierFactory</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/JdbcDataGenerator.html"
+                            style="font-size: 26px;color:#f6c342"
+                            title="Average Method Complexity - 3.2 , Coverage - 64.3% ">JdbcDataGenerator</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/RowParamsGenerator.html"
+                            style="font-size: 18px;color:#14892c"
+                            title="Average Method Complexity - 1.5 , Coverage - 88.2% ">RowParamsGenerator</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/KeySettingStepImpl.html"
+                            style="font-size: 17px;color:#14892c"
+                            title="Average Method Complexity - 1.25 , Coverage - 90% ">KeySettingStepImpl</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/ColumnMeta.html"
+                            style="font-size: 25px;color:#e7a19b"
+                            title="Average Method Complexity - 3 , Coverage - 53.1% ">ColumnMeta</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/ValueTomb.html"
+                            style="font-size: 18px;color:#14892c"
+                            title="Average Method Complexity - 1.5 , Coverage - 86.5% ">ValueTomb</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/BatchWorker.html"
+                            style="font-size: 19px;color:#d04437"
+                            title="Average Method Complexity - 1.667 , Coverage - 0% ">SingleBatchWorker</a>
+                                    
+                                                                <a class="tag" href="guru/mikelue/foxglove/jdbc/KeySupplierOfInt.html"
+                            style="font-size: 17px;color:#fae1a0"
+                            title="Average Method Complexity - 1.182 , Coverage - 81.8% ">KeySupplierOfInt</a>
+                                                    <p><a href="top-risks.html">See more</a></p>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex packages</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.8843683</span>88.4%</div><div style="display: table-cell">
+ <div title="88.4% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:88.4%"></div></div></div></div></td>
+                            <td>
+                                <a href="guru/mikelue/foxglove/jdbc/pkg-summary.html">guru.mikelue.foxglove.jdbc</a>
+                                <span class="aui-badge" title="Package complexity">247</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9722222</span>97.2%</div><div style="display: table-cell">
+ <div title="97.2% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:97.2%"></div></div></div></div></td>
+                            <td>
+                                <a href="guru/mikelue/foxglove/annotation/pkg-summary.html">guru.mikelue.foxglove.annotation</a>
+                                <span class="aui-badge" title="Package complexity">97</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9780702</span>97.8%</div><div style="display: table-cell">
+ <div title="97.8% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:97.8%"></div></div></div></div></td>
+                            <td>
+                                <a href="guru/mikelue/foxglove/setting/pkg-summary.html">guru.mikelue.foxglove.setting</a>
+                                <span class="aui-badge" title="Package complexity">53</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.5145631</span>51.5%</div><div style="display: table-cell">
+ <div title="51.5% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:51.5%"></div></div></div></div></td>
+                            <td>
+                                <a href="guru/mikelue/foxglove/functional/pkg-summary.html">guru.mikelue.foxglove.functional</a>
+                                <span class="aui-badge" title="Package complexity">38</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9186992</span>91.9%</div><div style="display: table-cell">
+ <div title="91.9% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:91.9%"></div></div></div></div></td>
+                            <td>
+                                <a href="guru/mikelue/foxglove/springframework/pkg-summary.html">guru.mikelue.foxglove.springframework</a>
+                                <span class="aui-badge" title="Package complexity">34</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+        <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Most complex classes</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+                                                <tr>
+                            <td>1. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9859155</span>98.6%</div><div style="display: table-cell">
+ <div title="98.6% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:98.6%"></div></div></div></div></td>
+                            <td>
+                                <a  href="guru/mikelue/foxglove/setting/DataSetting.html"  title="guru.mikelue.foxglove.setting.DataSetting">DataSetting</a>
+                                <span class="aui-badge" title="Class complexity">34</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>2. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.8918919</span>89.2%</div><div style="display: table-cell">
+ <div title="89.2% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:89.2%"></div></div></div></div></td>
+                            <td>
+                                <a  href="guru/mikelue/foxglove/jdbc/MetaUtils.html"  title="guru.mikelue.foxglove.jdbc.MetaUtils">MetaUtils</a>
+                                <span class="aui-badge" title="Class complexity">29</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>3. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9468085</span>94.7%</div><div style="display: table-cell">
+ <div title="94.7% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:94.7%"></div></div></div></div></td>
+                            <td>
+                                <a  href="guru/mikelue/foxglove/springframework/SpringContextObjectFactory.html"  title="guru.mikelue.foxglove.springframework.SpringContextObjectFactory">SpringContextObjectFactory</a>
+                                <span class="aui-badge" title="Class complexity">24</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>4. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.9830508</span>98.3%</div><div style="display: table-cell">
+ <div title="98.3% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:98.3%"></div></div></div></div></td>
+                            <td>
+                                <a  href="guru/mikelue/foxglove/annotation/DataGenContextImpl.html"  title="guru.mikelue.foxglove.annotation.DataGenContextImpl">DataGenContextImpl</a>
+                                <span class="aui-badge" title="Class complexity">19</span>
+                            </td>
+                        </tr>
+                                            
+                                                <tr>
+                            <td>5. </td>
+                            <td><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">1.0</span>100%</div><div style="display: table-cell">
+ <div title="100% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:100%"></div></div></div></div></td>
+                            <td>
+                                <a  href="guru/mikelue/foxglove/jdbc/JdbcTableFacet.html"  title="guru.mikelue.foxglove.jdbc.JdbcTableFacet.Builder">JdbcTableFacet.Builder</a>
+                                <span class="aui-badge" title="Class complexity">17</span>
+                            </td>
+                        </tr>
+                                    </table>
+            </div>
+        </div>
+
+                <div class="dashboard-widget">
+            <header class="dashboard-widget-header">
+                <h3>Least tested methods</h3>
+            </header>
+            <div class="dashboard-widget-content">
+                <table class="aui">
+                                            
+
+                    <tr>
+                        <td align="right">1.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ColumnMeta.equals(Object)&#160;:&#160;boolean" href="guru/mikelue/foxglove/ColumnMeta.html?line=112#src-112">ColumnMeta.equals(Object)&#160;:&#160;boolean</a>
+                            <span class="aui-badge" title="Method complexity">4</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">2.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="SingleBatchWorker.addBatch(Map&lt;ColumnMeta,&#160;Object&gt;)&#160;:&#160;void" href="guru/mikelue/foxglove/jdbc/BatchWorker.html?line=195#src-195">SingleBatchWorker.addBatch(Map&lt;ColumnMeta,&#160;Object&gt;)&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">3</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">3.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="TupleAccessorImpl.toString()&#160;:&#160;String" href="guru/mikelue/foxglove/jdbc/TupleAccessorImpl.html?line=128#src-128">TupleAccessorImpl.toString()&#160;:&#160;String</a>
+                            <span class="aui-badge" title="Method complexity">2</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">4.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ThreadSafeSupplierImpl.get()&#160;:&#160;T" href="guru/mikelue/foxglove/functional/StatefulSupplier.html?line=37#src-37">ThreadSafeSupplierImpl.get()&#160;:&#160;T</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">5.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ValueTomb.toString()&#160;:&#160;String" href="guru/mikelue/foxglove/jdbc/ValueTomb.html?line=107#src-107">ValueTomb.toString()&#160;:&#160;String</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">6.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Int8SequenceSupplier.nextValue()&#160;:&#160;Long" href="guru/mikelue/foxglove/functional/Int8SequenceSupplier.html?line=66#src-66">Int8SequenceSupplier.nextValue()&#160;:&#160;Long</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">7.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="JdbcDataGenerator.setBatchSize(int)&#160;:&#160;JdbcDataGenerator" href="guru/mikelue/foxglove/jdbc/JdbcDataGenerator.html?line=79#src-79">JdbcDataGenerator.setBatchSize(int)&#160;:&#160;JdbcDataGenerator</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">8.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Int8SequenceSupplier.Int8SequenceSupplier(long,int)" href="guru/mikelue/foxglove/functional/Int8SequenceSupplier.html?line=46#src-46">Int8SequenceSupplier.Int8SequenceSupplier(long,int)</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">9.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="RoundRobinValueSupplier.of(Stream&lt;?&#160;extends&#160;T&gt;)&#160;:&#160;RoundRobinValueSupplier&lt;T&gt;" href="guru/mikelue/foxglove/functional/RoundRobinValueSupplier.html?line=45#src-45">RoundRobinValueSupplier.of(Stream&lt;?&#160;extends&#160;T&gt;)&#160;:&#160;RoundRobinValueSupplier&lt;T&gt;</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">10.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="SingleBatchWorker.SingleBatchWorker(PreparedStatement,WorkerAssistance)" href="guru/mikelue/foxglove/jdbc/BatchWorker.html?line=188#src-188">SingleBatchWorker.SingleBatchWorker(PreparedStatement,WorkerAssistance)</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">11.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="SingleBatchWorker.executeBatch()&#160;:&#160;void" href="guru/mikelue/foxglove/jdbc/BatchWorker.html?line=208#src-208">SingleBatchWorker.executeBatch()&#160;:&#160;void</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">12.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Int4SequenceSupplier.Int4SequenceSupplier()" href="guru/mikelue/foxglove/functional/Int4SequenceSupplier.html?line=21#src-21">Int4SequenceSupplier.Int4SequenceSupplier()</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">13.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Int4SequenceSupplier.Int4SequenceSupplier(int)" href="guru/mikelue/foxglove/functional/Int4SequenceSupplier.html?line=33#src-33">Int4SequenceSupplier.Int4SequenceSupplier(int)</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">14.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Int4SequenceSupplier.lastValue()&#160;:&#160;Integer" href="guru/mikelue/foxglove/functional/Int4SequenceSupplier.html?line=77#src-77">Int4SequenceSupplier.lastValue()&#160;:&#160;Integer</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">15.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Int8SequenceSupplier.Int8SequenceSupplier()" href="guru/mikelue/foxglove/functional/Int8SequenceSupplier.html?line=21#src-21">Int8SequenceSupplier.Int8SequenceSupplier()</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">16.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Int8SequenceSupplier.Int8SequenceSupplier(long)" href="guru/mikelue/foxglove/functional/Int8SequenceSupplier.html?line=33#src-33">Int8SequenceSupplier.Int8SequenceSupplier(long)</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">17.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Int8SequenceSupplier.getAsLong()&#160;:&#160;long" href="guru/mikelue/foxglove/functional/Int8SequenceSupplier.html?line=57#src-57">Int8SequenceSupplier.getAsLong()&#160;:&#160;long</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">18.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="Int8SequenceSupplier.lastValue()&#160;:&#160;Long" href="guru/mikelue/foxglove/functional/Int8SequenceSupplier.html?line=77#src-77">Int8SequenceSupplier.lastValue()&#160;:&#160;Long</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">19.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="RowIndexToValueSupplier.getCurrentIndex()&#160;:&#160;int" href="guru/mikelue/foxglove/functional/RowIndexToValueSupplier.html?line=53#src-53">RowIndexToValueSupplier.getCurrentIndex()&#160;:&#160;int</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                            
+
+                    <tr>
+                        <td align="right">20.</td>
+                        <td align="right"><div style="display: table; width: 100%">
+<div class="barGraphValue"><span class="sortValue">0.0</span>0%</div><div style="display: table-cell">
+ <div title="0% Covered"  style="min-width:40px;" class="barNegative contribBarNegative "><div class="barPositive contribBarPositive " style="width:0%"></div></div></div></div></td>
+                        <td>
+                              <!-- normal method -->
+                                                      <a title="ThreadSafeSupplierImpl.ThreadSafeSupplierImpl(StatefulSupplier&lt;?&#160;extends&#160;T&gt;)" href="guru/mikelue/foxglove/functional/StatefulSupplier.html?line=32#src-32">ThreadSafeSupplierImpl.ThreadSafeSupplierImpl(StatefulSupplier&lt;?&#160;extends&#160;T&gt;)</a>
+                            <span class="aui-badge" title="Method complexity">1</span>
+
+                        </td>
+                    </tr>
+                                    </table>
+            </div>
+        </div>
+        
+    </div>
+</div>
+                            </div> <!-- tabs-pane active-pane -->
+                        </div>
+
+    <script type="text/javascript" src="jit.js" ></script>
+    <script type="text/javascript" src="treemap-dash-json.js" ></script>
+
+                        </div> <!-- class="aui-page-panel-content-clover" -->
+                    <footer id="footer" role="contentinfo">
+    <section class="footer-body">
+        <ul>
+            <li>
+                Report generated by <a target="_new" href="https://openclover.org">OpenClover</a> v 4.5.2
+                on Fri Jul 17 2026 06:10:44 UTC using coverage data from Fri Jul 17 2026 06:10:40 UTC.
+            </li>
+        </ul>
+        <ul>
+            <li>OpenClover is free and open-source software. </li>
+        </ul>
+    </section>
+</footer>                </section> <!-- class="aui-page-panel-content" -->
+            </div> <!-- class="aui-page-panel-inner" -->
+        </div> <!-- class="aui-page-panel" -->
+    </div> <!-- id="page" -->
+</body>
+</html>
