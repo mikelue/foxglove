@@ -80,8 +80,8 @@ ORDER BY cr_created_at DESC
 
 ## Integration
 
-* See {foxglove-url}/quickstart/junit[JUnit 5 Quick Start] for usage with https://docs.junit.org/5.10.5/user-guide/https://docs.junit.org/5.10.5/user-guide/[JUnit 5].
-* See {foxglove-url}/quickstart/springframework[SpringFramework Quick Start] for usage with https://docs.spring.io/spring-framework/reference/6.0/testing/support-jdbc.html[SprinFramwork - JDBC Testing Support].
+* See {foxglove-url}/quickstart/junit[JUnit 5 Quick Start] for usage with https://docs.junit.org/5.10.5/user-guide/[JUnit 5].
+* See {foxglove-url}/quickstart/springframework[SpringFramework Quick Start] for usage with https://docs.spring.io/spring-framework/docs/6.0.8/reference/html/testing.html#integration-testing-support-jdbc[SpringFramework - JDBC Testing Support].
 
 ## Documentations
 
