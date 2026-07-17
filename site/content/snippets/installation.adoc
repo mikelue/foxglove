@@ -4,7 +4,7 @@
 <dependency>
     <groupId>guru.mikelue.foxglove</groupId>
     <artifactId>core</artifactId>
-    <version>1.0</version>
+    <version>1.0.4</version>
     <scope>test</scope>
 </dependency>
 ----
@@ -21,7 +21,7 @@ repositories {
     }
 }
 
-testImplementation 'guru.mikelue.foxglove:core:1.0'
+testImplementation 'guru.mikelue.foxglove:core:1.0.4'
 ----
 
 ---
@@ -31,7 +31,7 @@ testImplementation 'guru.mikelue.foxglove:core:1.0'
 ----
 resolvers += "foxglove-repo" at "https://maven.pkg.github.com/mikelue/foxglove"
 
-libraryDependencies += "guru.mikelue.foxglove" % "core" % "1.0" % Test
+libraryDependencies += "guru.mikelue.foxglove" % "core" % "1.0.4" % Test
 ----
 
 ---
@@ -55,5 +55,5 @@ libraryDependencies += "guru.mikelue.foxglove" % "core" % "1.0" % Test
 .Ivy
 [source,xml]
 ----
-<dependency org="guru.mikelue.foxglove" name="core" rev="1.0" conf="test"/>
+<dependency org="guru.mikelue.foxglove" name="core" rev="1.0.4" conf="test"/>
 ----
