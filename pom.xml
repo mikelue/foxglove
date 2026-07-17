@@ -5,7 +5,7 @@
 
 	<groupId>guru.mikelue.foxglove</groupId>
 	<artifactId>core</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.0.4</version>
 	<packaging>jar</packaging>
 	<url>https://foxglove.mikelue.guru/</url>
 
@@ -672,7 +672,7 @@
 		<connection>scm:git:git://github.com/mikelue/foxglove</connection>
 		<developerConnection>scm:git:ssh://git@github.com/mikelue/foxglove</developerConnection>
 		<url>https://github.com/mikelue/foxglove</url>
-		<tag>HEAD</tag>
+		<tag>v1.0.4</tag>
 	</scm>
 
 	<distributionManagement>
